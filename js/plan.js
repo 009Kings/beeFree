@@ -3,16 +3,28 @@ function load() {
     loadImage("background2.png", "background");
     loadImage("vgForegroundGrass1.png", "foreground");
     loadImage("bee1.png", "bee");
+    loadImage("flower1.png", "flower1");
 }
 
 function startIfReady() {
-    
-    // Start listening for imput (Add event listeners only once);
-    addListeners();
+    // Make sure all the images are ready to load
+    for (const key in readiness) {
+        while (readiness.key === false) {
+            break;
+        }
+        imagesReady = true;
+    }
 
-    // put tick on an interval
-    setInterval(tick, 15);
+    if (imagesReady === true) {
+        // Start listening for imput (Add event listeners only once);
+        addListeners();
 
+        // put tick on an interval
+        setInterval(tick, 15);
+
+        generateFlower();
+    }
+   
 }
 
 // What happens every "frame"
@@ -29,13 +41,25 @@ function update() {
     // bg state
     bgXOffset += 1;
     foregroundXOffset += 4;
+    for (let i = 0; i < flowers.length; i++) {
+        flowers[i].flowerOffset += 2;
+
+        // Delete the flower!
+        // if (flowers[i].flowerX < 0 - FLOWER_WIDTH) {
+        //     for (const key in flowers[i]) {
+        //         flowers[i][key] = null
+        //     }
+        // }
+    }
+    
 }
 
 function render() {
     // MUST RENDER IN ORDER OF LAYERS
     renderBackground();
-    renderForeground();
     renderBee();
+    renderFlower();
+    renderForeground();
 }
 
 /* ---------------- Helper Function ---------------- */
@@ -80,6 +104,40 @@ function renderForeground() {
     ctx.drawImage(images.foreground, x2, 0, BG_WIDTH, CANVAS_HEIGHT);
 }
 
+/* ---------------- Flowers ---------------- */
+function generateFlower () {
+    addFlower();
+    // 1000 is my minimum (however long it takes to get flower width forward. flowerWidth / foregroundVelocity). 2000 is my max space between flowers.
+    setTimeout(generateFlower, 1000 + (Math.random() * 2000));
+}
+
+function addFlower () {
+    // Set Random y height in a window
+    flowers[flowerNum] = {};
+    flowers[flowerNum].flowerY = (Math.floor(Math.random() * (CANVAS_HEIGHT - 100)));
+    flowers[flowerNum].flowerOffset = 0; //unique offset for each flower
+
+    // Make sure the flowers array is no more than the number of max flowers
+    if (flowerNum > maxFlowers) {
+        flowerNum = - 1;
+    }
+    flowerNum ++;
+
+    // Generate stem : FUTURE FEATURE
+
+}
+
+function renderFlower() {
+
+    for (let i = 0; i < flowers.length; i++) {
+        flowers[i].flowerX = CANVAS_WIDTH + FLOWER_WIDTH - flowers[i].flowerOffset;
+
+        ctx.drawImage(images.flower1, flowers[i].flowerX, flowers[i].flowerY, 50, 50);
+    }
+    
+}
+
+
 /* ---------------- Bee ---------------- */
 
 function renderBee() {
@@ -88,7 +146,7 @@ function renderBee() {
     ctx.drawImage(images.bee, beeX, beeY, 60, 50);
 }
 
-/* ---------------- Bee ---------------- */
+/* ----- Bee Movement ----- */
 
 function addListeners() {
     // add event listeners for keyboard
