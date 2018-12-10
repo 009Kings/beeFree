@@ -101,25 +101,29 @@ function addListeners() {
 function keyDownHandler(e) {
     // Up Arrow
     if(e.keyCode == 38){
-        console.log("Up clicked");
-        beeY -= 10;
+        if (beeY > 0) {
+            beeY -= 10;
+        }
     }
 
     // Right Arrow
     if(e.keyCode == 39){
-        console.log("Right clicked");
-        beeX += 15;
+        if (beeX < CANVAS_WIDTH - BEE_WIDTH) {
+            beeX += 15;
+        }
     }
 
     // Down Arrow
     if(e.keyCode == 40){
-        console.log("Down clicked");
-        beeY += 15;
+        if (beeY < CANVAS_HEIGHT - BEE_HEIGHT) {
+            beeY += 15;
+        }
     }
 
     // Left Arrow
     if(e.keyCode == 37){
-        console.log("Left clicked");
-        beeX -= 15;
+        if (beeX > 0) {
+            beeX -= 15;
+        }
     }
 }

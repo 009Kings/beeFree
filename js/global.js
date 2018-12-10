@@ -1,5 +1,6 @@
 // Constants
-
+const BEE_HEIGHT = 50;
+const BEE_WIDTH = 60;
 const BG_WIDTH = 2800;
 const CANVAS_WIDTH = 700;
 const CANVAS_HEIGHT = 350;
