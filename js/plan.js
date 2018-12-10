@@ -6,13 +6,18 @@ function load() {
 }
 
 function startIfReady() {
+    
+    // Start listening for imput (Add event listeners only once);
+    addListeners();
+
     // put tick on an interval
-    setInterval(tick, 16);
+    setInterval(tick, 15);
+
 }
 
 // What happens every "frame"
 function tick() {
-    // Update
+    // Update (everything that doesn't rely on an event listener ie. time passing)
     update();
 
     // Render
@@ -78,9 +83,43 @@ function renderForeground() {
 /* ---------------- Bee ---------------- */
 
 function renderBee() {
-    var x = 50;
-    var y = 150;
 
     // Draw the bee
-    ctx.drawImage(images.bee, x, y, 60, 50);
+    ctx.drawImage(images.bee, beeX, beeY, 60, 50);
+}
+
+/* ---------------- Bee ---------------- */
+
+function addListeners() {
+    // add event listeners for keyboard
+    document.addEventListener("keydown", keyDownHandler, false);
+
+    // add event listeners for touch : MOBILE FUTURE DEVELOPMENT
+
+}
+
+function keyDownHandler(e) {
+    // Up Arrow
+    if(e.keyCode == 38){
+        console.log("Up clicked");
+        beeY -= 10;
+    }
+
+    // Right Arrow
+    if(e.keyCode == 39){
+        console.log("Right clicked");
+        beeX += 15;
+    }
+
+    // Down Arrow
+    if(e.keyCode == 40){
+        console.log("Down clicked");
+        beeY += 15;
+    }
+
+    // Left Arrow
+    if(e.keyCode == 37){
+        console.log("Left clicked");
+        beeX -= 15;
+    }
 }
