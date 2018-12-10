@@ -3,17 +3,31 @@ function load() {
     loadBackground();
 }
 
-function start() {
+function startIfReady() {
     // put tick on an interval
+    setInterval(tick, 16);
 }
 
+// What happens every "frame"
 function tick() {
     // Update
-    //increase xOffset
+    update();
 
     // Render
-    //
+    render();
 }
+
+// Updates state
+function update() {
+    // bg state
+    bgXOffset += 3;
+}
+
+function render() {
+    renderBackground();
+}
+
+/* ---------------- Background ---------------- */
 
 function loadBackground() {
     
@@ -24,7 +38,7 @@ function loadBackground() {
 
     // When the images loads, store that it is DTR (down to render)
     img.onload = function () {
-        imagesReady = true;
+        readiness.background = true;
     };
 }
 
@@ -37,7 +51,7 @@ function renderBackground() {
     // Draw dem backgrounds
     ctx.drawImage(images.background, x1, 0, BG_WIDTH, CANVAS_HEIGHT);
     ctx.drawImage(images.background, x2, 0, BG_WIDTH, CANVAS_HEIGHT);
-
-    bgXOffset ++;
 }
+
+/* ---------------- Foreground ---------------- */
 

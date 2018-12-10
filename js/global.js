@@ -5,4 +5,5 @@ let bgXOffset = 0;
 
 var ctx = document.getElementById("game").getContext('2d');
 let images = {};
+let readiness = {};
 let imagesReady = false;
