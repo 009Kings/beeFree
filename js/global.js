@@ -1,6 +1,7 @@
 // Constants
 const BEE_HEIGHT = 50;
 const BEE_WIDTH = 60;
+const BEE_VELOCITY = 5;
 const BG_WIDTH = 2800;
 const CANVAS_WIDTH = 700;
 const CANVAS_HEIGHT = 350;
@@ -20,6 +21,11 @@ let maxFlowers = 20;
 
 let beeX = 50;
 let beeY = 150;
+let beeMoveUp;
+let beeMoveDown;
+let beeMoveLeft;
+let beeMoveRight;
+
 let bgXOffset = 0;
 let flowerY;
 let foregroundXOffset = 0;

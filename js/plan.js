@@ -44,7 +44,8 @@ function update() {
     foregroundXOffset += 4;
     for (let i = 0; i < flowers.length; i++) {
         flowers[i].flowerOffset += flowers[i].randomOffset; // KEEP OR NOT? If not, replace flowers[i].randomOffset with set number
-    }  
+    } 
+    moveBee(); 
 }
 
 function render() {
@@ -145,6 +146,9 @@ function renderBee() {
 function addListeners() {
     // add event listeners for keyboard
     document.addEventListener("keydown", keyDownHandler, false);
+    
+    //gradually stop
+    document.addEventListener("keyup", keyUpHandler, false);
 
     // add event listeners for touch : MOBILE FUTURE DEVELOPMENT
 
@@ -153,29 +157,60 @@ function addListeners() {
 function keyDownHandler(e) {
     // Up Arrow
     if(e.keyCode == 38){
-        if (beeY > 0) {
-            beeY -= 10;
-        }
+        beeMoveUp = true;
     }
-
     // Right Arrow
     if(e.keyCode == 39){
-        if (beeX < CANVAS_WIDTH - BEE_WIDTH) {
-            beeX += 15;
-        }
+        beeMoveRight = true;
     }
 
     // Down Arrow
     if(e.keyCode == 40){
-        if (beeY < CANVAS_HEIGHT - BEE_HEIGHT) {
-            beeY += 15;
-        }
+        beeMoveDown = true;
     }
 
     // Left Arrow
     if(e.keyCode == 37){
-        if (beeX > 0) {
-            beeX -= 15;
-        }
+        beeMoveLeft = true;
+    }
+}
+
+function keyUpHandler(e) {
+    if(e.keyCode == 38){
+        beeMoveUp = false;
+    }
+
+    // Right Arrow
+    if(e.keyCode == 39){
+        beeMoveRight = false;
+    }
+
+    // Down Arrow
+    if(e.keyCode == 40){
+        beeMoveDown = false;
+    }
+
+    // Left Arrow
+    if(e.keyCode == 37){
+        beeMoveLeft = false;
+    }
+}
+
+function moveBee() {
+    // Move Bee Up
+    if (beeY > 0 && beeMoveUp == true) {
+        beeY -= BEE_VELOCITY - 1;
+    }
+    // Move Bee Right
+    if (beeX < CANVAS_WIDTH - BEE_WIDTH && beeMoveRight == true) {
+        beeX += BEE_VELOCITY;
+    }
+    // Move Bee Down
+    if (beeY < CANVAS_HEIGHT - BEE_HEIGHT && beeMoveDown == true) {
+        beeY += BEE_VELOCITY;
+    }
+    // Move Bee Left
+    if (beeX > 0 && beeMoveLeft == true) {
+        beeX -= BEE_VELOCITY;
     }
 }
