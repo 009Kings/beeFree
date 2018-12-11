@@ -21,10 +21,11 @@ function startIfReady() {
 
         // put tick on an interval
         setInterval(tick, 15);
-
+        
+        // Create flowers at an interval determined by generate flower
         generateFlower();
-    }
-   
+
+    }  
 }
 
 // What happens every "frame"
@@ -38,27 +39,19 @@ function tick() {
 
 // Updates state
 function update() {
-    // bg state
-    bgXOffset += 1;
+    // Zoomies of various things
+    bgXOffset += .5;
     foregroundXOffset += 4;
     for (let i = 0; i < flowers.length; i++) {
-        flowers[i].flowerOffset += 2;
-
-        // Delete the flower!
-        // if (flowers[i].flowerX < 0 - FLOWER_WIDTH) {
-        //     for (const key in flowers[i]) {
-        //         flowers[i][key] = null
-        //     }
-        // }
-    }
-    
+        flowers[i].flowerOffset += flowers[i].randomOffset; // KEEP OR NOT? If not, replace flowers[i].randomOffset with set number
+    }  
 }
 
 function render() {
     // MUST RENDER IN ORDER OF LAYERS
     renderBackground();
-    renderBee();
     renderFlower();
+    renderBee();
     renderForeground();
 }
 
@@ -108,14 +101,15 @@ function renderForeground() {
 function generateFlower () {
     addFlower();
     // 1000 is my minimum (however long it takes to get flower width forward. flowerWidth / foregroundVelocity). 2000 is my max space between flowers.
-    setTimeout(generateFlower, 1000 + (Math.random() * 2000));
+    setTimeout(generateFlower, 500 + (Math.random() * 2000));
 }
 
 function addFlower () {
     // Set Random y height in a window
     flowers[flowerNum] = {};
-    flowers[flowerNum].flowerY = (Math.floor(Math.random() * (CANVAS_HEIGHT - 100)));
+    flowers[flowerNum].flowerY = (Math.floor(Math.random() * (CANVAS_HEIGHT - 80)) + 10);
     flowers[flowerNum].flowerOffset = 0; //unique offset for each flower
+    flowers[flowerNum].randomOffset = Math.ceil(Math.random() * 2) + .5; // KEEP OR NOT? If not, delete line 112;
 
     // Make sure the flowers array is no more than the number of max flowers
     if (flowerNum > maxFlowers) {
@@ -124,15 +118,15 @@ function addFlower () {
     flowerNum ++;
 
     // Generate stem : FUTURE FEATURE
-
+    
 }
 
 function renderFlower() {
-
+    // Render each flower in our Flowers array
     for (let i = 0; i < flowers.length; i++) {
         flowers[i].flowerX = CANVAS_WIDTH + FLOWER_WIDTH - flowers[i].flowerOffset;
 
-        ctx.drawImage(images.flower1, flowers[i].flowerX, flowers[i].flowerY, 50, 50);
+        ctx.drawImage(images.flower1, flowers[i].flowerX, flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
     }
     
 }
