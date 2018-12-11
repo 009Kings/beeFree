@@ -21,7 +21,7 @@ function startIfReady() {
         addListeners();
 
         // put tick on an interval
-        setInterval(tick, 15);
+        setInterval(tick, FPS);
         
         // Create flowers at an interval determined by generate flower
         generateFlower();
@@ -44,7 +44,7 @@ function update() {
     bgXOffset += .5;
     foregroundXOffset += 4;
     for (let i = 0; i < flowers.length; i++) {
-        flowers[i].flowerOffset += flowers[i].randomOffset; // KEEP OR NOT? If not, replace flowers[i].randomOffset with set number
+        flowers[i].flowerOffset += flowers[i].randomOffset; 
     } 
     moveBee(); 
 
@@ -102,10 +102,17 @@ function renderForeground() {
     ctx.drawImage(images.foreground, x2, 0, BG_WIDTH, CANVAS_HEIGHT);
 }
 
+/* ------------ Score ---------- */
+
+function renderScore() {
+    ctx.font = "20px Cherry Swash";
+    ctx.fillText(`Score: ${score}`, CANVAS_WIDTH - 110, 20);
+}
+
 /* ---------------- Flowers ---------------- */
 function generateFlower () {
     addFlower();
-    // 1000 is my minimum (however long it takes to get flower width forward. flowerWidth / foregroundVelocity). 2000 is my max space between flowers.
+    // 500 is my minimum. 2000 is my max space between flowers.
     setTimeout(generateFlower, 500 + (Math.random() * 1500));
 }
 
@@ -114,7 +121,7 @@ function addFlower () {
     flowers[flowerNum] = {};
     flowers[flowerNum].flowerY = (Math.floor(Math.random() * (CANVAS_HEIGHT - 80)) + 10);
     flowers[flowerNum].flowerOffset = 0; //unique offset for each flower
-    flowers[flowerNum].randomOffset = Math.ceil(Math.random() * 2) + .5; // KEEP OR NOT? If not, delete line 112;
+    flowers[flowerNum].randomOffset = Math.ceil(Math.random() * 2) + .5;
     flowers[flowerNum].pollinated = false;
 
     // Make sure the flowers array is no more than the number of max flowers
@@ -141,7 +148,6 @@ function renderFlower() {
         ctx.rect(flowers[i].flowerX, flowers[i].flowerY, FLOWER_WIDTH, FLOWER_HEIGHT);
         ctx.fill()*/
     }
-    
 }
 
 
@@ -244,9 +250,3 @@ function moveBee() {
     }
 }
 
-/* ------------ Score ---------- */
-
-function renderScore() {
-    ctx.font = "20px Cherry Swash";
-    ctx.fillText(`Score: ${score}`, CANVAS_WIDTH - 110, 20);
-}
