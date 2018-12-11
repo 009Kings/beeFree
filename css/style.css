@@ -1,11 +1,17 @@
+html {
+    height: 100%;
+}
 body {
+    min-height: 100%;
     display: grid;
     background-color: rgb(255, 250, 200);
+    /* position: relative; */
 }
 
 h1, h2 {
     text-align: center;
     color: #660c2b;
+    align-items: start;
 }
 
 h1 {
@@ -23,4 +29,10 @@ h2 {
 canvas {
     border: 5px solid rgb(124, 49, 61);
     margin: 0 auto;
+    grid-template-rows: 4fr auto;
+
+}
+
+footer {
+   margin: 0 auto;
 }

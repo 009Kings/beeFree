@@ -16,11 +16,12 @@ let maxFlowers = 30;
 let readiness = {};
 
 let bee = {
-    beeX: 50,
-    beeY: 150,
-    HEIGHT: 50,
-    WIDTH: 60,
-    VELOCITY: 3.5,
+    x: 50,
+    y: 150,
+    height: 50,
+    width: 60,
+    wings: 10,
+    velocity: 3.5,
     beeMoveUp: false,
     beeMoveDown: false,
     beeMoveLeft: false,

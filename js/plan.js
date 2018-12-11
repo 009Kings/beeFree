@@ -48,7 +48,7 @@ function update() {
     } 
     moveBee(); 
 
-    checkForCollision();
+    checkForFlowerCollision();
 }
 
 function render() {
@@ -150,18 +150,18 @@ function renderFlower() {
 function renderBee() {
 
     // Draw the bee
-    ctx.drawImage(images.bee, bee.beeX, bee.beeY, 60, 50);
+    ctx.drawImage(images.bee, bee.x, bee.y, 60, 50);
 
     /* ------ BEEbugging Purposes ------
     //Bee Box
-    let bXLeft = bee.beeX;
-    let bXRight = bee.beeX + bee.WIDTH;
-    let bYTop = bee.beeY + 10;
-    let bYBottom = bee.beeY + bee.HEIGHT;
+    let bXLeft = bee.x;
+    let bXRight = bee.x + bee.width;
+    let bYTop = bee.y + 10;
+    let bYBottom = bee.y + bee.height;
     
     ctx.fillStyle = "pink";
     ctx.beginPath();
-    ctx.rect(bXLeft, bYTop, bee.WIDTH, bYBottom-bYTop);
+    ctx.rect(bXLeft, bYTop, bee.width, bYBottom-bYTop);
     ctx.fill()*/
 
     
@@ -222,25 +222,25 @@ function keyUpHandler(e) {
 
 function moveBee() {
     // GraviBEE
-    if (bee.beeY <= CANVAS_HEIGHT - bee.HEIGHT) {
-        bee.beeY += GRAVITY;
+    if (bee.y <= CANVAS_HEIGHT - bee.height) {
+        bee.y += GRAVITY;
     }
 
     // Move Bee Up
-    if (bee.beeY > 0 && bee.beeMoveUp == true) {
-        bee.beeY -= bee.VELOCITY;
+    if (bee.y > 0 && bee.beeMoveUp == true) {
+        bee.y -= bee.velocity;
     }
     // Move Bee Right
-    if (bee.beeX < CANVAS_WIDTH - bee.WIDTH && bee.beeMoveRight == true) {
-        bee.beeX += bee.VELOCITY;
+    if (bee.x < CANVAS_WIDTH - bee.width && bee.beeMoveRight == true) {
+        bee.x += bee.velocity - .5;
     }
     // Move Bee Down
-    if (bee.beeY < CANVAS_HEIGHT - bee.HEIGHT && bee.beeMoveDown == true) {
-        bee.beeY += bee.VELOCITY;
+    if (bee.y < CANVAS_HEIGHT - bee.height && bee.beeMoveDown == true) {
+        bee.y += bee.velocity;
     }
     // Move Bee Left
-    if (bee.beeX > 0 && bee.beeMoveLeft == true) {
-        bee.beeX -= bee.VELOCITY;
+    if (bee.x > 0 && bee.beeMoveLeft == true) {
+        bee.x -= bee.velocity + 1;
     }
 }
 
@@ -248,5 +248,5 @@ function moveBee() {
 
 function renderScore() {
     ctx.font = "20px Cherry Swash";
-    ctx.fillText(`Score: ${score}`, CANVAS_WIDTH - 100, 20);
+    ctx.fillText(`Score: ${score}`, CANVAS_WIDTH - 110, 20);
 }
