@@ -1,4 +1,26 @@
+body {
+    display: grid;
+    background-color: rgb(255, 250, 200);
+}
+
+h1, h2 {
+    text-align: center;
+    color: #660c2b;
+}
+
+h1 {
+    font-family: "Cherry Swash", cursive;
+    margin: 0;
+    font-size: 5vw;
+}
+
+h2 {
+    font-family: "Julius Sans One", sans-serif;
+    margin: 20px auto;
+    font-size: 3vw;
+}
+
 canvas {
-    border: 2px solid black;
+    border: 5px solid rgb(124, 49, 61);
     margin: 0 auto;
 }
