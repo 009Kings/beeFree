@@ -4,6 +4,7 @@ function load() {
     loadImage("vgForegroundGrass1.png", "foreground");
     loadImage("bee1.png", "bee");
     loadImage("flower1.png", "flower1");
+    loadImage("flower1polinated.png", "flower1pollinated");
 }
 
 function startIfReady() {
@@ -46,6 +47,8 @@ function update() {
         flowers[i].flowerOffset += flowers[i].randomOffset; // KEEP OR NOT? If not, replace flowers[i].randomOffset with set number
     } 
     moveBee(); 
+
+    checkForCollision();
 }
 
 function render() {
@@ -111,6 +114,7 @@ function addFlower () {
     flowers[flowerNum].flowerY = (Math.floor(Math.random() * (CANVAS_HEIGHT - 80)) + 10);
     flowers[flowerNum].flowerOffset = 0; //unique offset for each flower
     flowers[flowerNum].randomOffset = Math.ceil(Math.random() * 2) + .5; // KEEP OR NOT? If not, delete line 112;
+    flowers[flowerNum].pollinated = false;
 
     // Make sure the flowers array is no more than the number of max flowers
     if (flowerNum > maxFlowers) {
@@ -127,7 +131,17 @@ function renderFlower() {
     for (let i = 0; i < flowers.length; i++) {
         flowers[i].flowerX = CANVAS_WIDTH + FLOWER_WIDTH - flowers[i].flowerOffset;
 
-        ctx.drawImage(images.flower1, flowers[i].flowerX, flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
+        if (flowers[i].pollinated === true) {
+            ctx.drawImage(images.flower1pollinated, flowers[i].flowerX, flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
+        } else {
+            ctx.drawImage(images.flower1, flowers[i].flowerX, flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
+        }
+    
+        /* ------ Debugging purposes -----
+        ctx.fillStyle = "chartreuse";
+        ctx.beginPath();
+        ctx.rect(flowers[i].flowerX, flowers[i].flowerY, FLOWER_WIDTH, FLOWER_HEIGHT);
+        ctx.fill()*/
     }
     
 }
@@ -139,6 +153,21 @@ function renderBee() {
 
     // Draw the bee
     ctx.drawImage(images.bee, beeX, beeY, 60, 50);
+    beeY += 1;
+
+    /* ------ BEEbugging Purposes ------
+    //Bee Box
+    let bXLeft = beeX;
+    let bXRight = beeX + BEE_WIDTH;
+    let bYTop = beeY + 10;
+    let bYBottom = beeY + BEE_HEIGHT;
+    
+    ctx.fillStyle = "pink";
+    ctx.beginPath();
+    ctx.rect(bXLeft, bYTop, BEE_WIDTH, bYBottom-bYTop);
+    ctx.fill()*/
+
+    
 }
 
 /* ----- Bee Movement ----- */
@@ -199,7 +228,7 @@ function keyUpHandler(e) {
 function moveBee() {
     // Move Bee Up
     if (beeY > 0 && beeMoveUp == true) {
-        beeY -= BEE_VELOCITY - 1;
+        beeY -= BEE_VELOCITY + 1;
     }
     // Move Bee Right
     if (beeX < CANVAS_WIDTH - BEE_WIDTH && beeMoveRight == true) {
