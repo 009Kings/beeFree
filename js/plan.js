@@ -57,6 +57,7 @@ function render() {
     renderFlower();
     renderBee();
     renderForeground();
+    renderScore();
 }
 
 /* ---------------- Helper Function ---------------- */
@@ -105,7 +106,7 @@ function renderForeground() {
 function generateFlower () {
     addFlower();
     // 1000 is my minimum (however long it takes to get flower width forward. flowerWidth / foregroundVelocity). 2000 is my max space between flowers.
-    setTimeout(generateFlower, 500 + (Math.random() * 2000));
+    setTimeout(generateFlower, 500 + (Math.random() * 1500));
 }
 
 function addFlower () {
@@ -121,9 +122,6 @@ function addFlower () {
         flowerNum = - 1;
     }
     flowerNum ++;
-
-    // Generate stem : FUTURE FEATURE
-    
 }
 
 function renderFlower() {
@@ -152,19 +150,18 @@ function renderFlower() {
 function renderBee() {
 
     // Draw the bee
-    ctx.drawImage(images.bee, beeX, beeY, 60, 50);
-    beeY += 1;
+    ctx.drawImage(images.bee, bee.beeX, bee.beeY, 60, 50);
 
     /* ------ BEEbugging Purposes ------
     //Bee Box
-    let bXLeft = beeX;
-    let bXRight = beeX + BEE_WIDTH;
-    let bYTop = beeY + 10;
-    let bYBottom = beeY + BEE_HEIGHT;
+    let bXLeft = bee.beeX;
+    let bXRight = bee.beeX + bee.WIDTH;
+    let bYTop = bee.beeY + 10;
+    let bYBottom = bee.beeY + bee.HEIGHT;
     
     ctx.fillStyle = "pink";
     ctx.beginPath();
-    ctx.rect(bXLeft, bYTop, BEE_WIDTH, bYBottom-bYTop);
+    ctx.rect(bXLeft, bYTop, bee.WIDTH, bYBottom-bYTop);
     ctx.fill()*/
 
     
@@ -173,6 +170,7 @@ function renderBee() {
 /* ----- Bee Movement ----- */
 
 function addListeners() {
+    
     // add event listeners for keyboard
     document.addEventListener("keydown", keyDownHandler, false);
     
@@ -186,60 +184,69 @@ function addListeners() {
 function keyDownHandler(e) {
     // Up Arrow
     if(e.keyCode == 38){
-        beeMoveUp = true;
+        bee.beeMoveUp = true;
     }
     // Right Arrow
     if(e.keyCode == 39){
-        beeMoveRight = true;
+        bee.beeMoveRight = true;
     }
 
     // Down Arrow
     if(e.keyCode == 40){
-        beeMoveDown = true;
+        bee.beeMoveDown = true;
     }
 
     // Left Arrow
     if(e.keyCode == 37){
-        beeMoveLeft = true;
+        bee.beeMoveLeft = true;
     }
 }
 
 function keyUpHandler(e) {
     if(e.keyCode == 38){
-        beeMoveUp = false;
+        bee.beeMoveUp = false;
     }
-
     // Right Arrow
     if(e.keyCode == 39){
-        beeMoveRight = false;
+        bee.beeMoveRight = false;
     }
-
     // Down Arrow
     if(e.keyCode == 40){
-        beeMoveDown = false;
+        bee.beeMoveDown = false;
     }
-
     // Left Arrow
     if(e.keyCode == 37){
-        beeMoveLeft = false;
+        bee.beeMoveLeft = false;
     }
 }
 
 function moveBee() {
+    // GraviBEE
+    if (bee.beeY <= CANVAS_HEIGHT - bee.HEIGHT) {
+        bee.beeY += GRAVITY;
+    }
+
     // Move Bee Up
-    if (beeY > 0 && beeMoveUp == true) {
-        beeY -= BEE_VELOCITY + 1;
+    if (bee.beeY > 0 && bee.beeMoveUp == true) {
+        bee.beeY -= bee.VELOCITY;
     }
     // Move Bee Right
-    if (beeX < CANVAS_WIDTH - BEE_WIDTH && beeMoveRight == true) {
-        beeX += BEE_VELOCITY;
+    if (bee.beeX < CANVAS_WIDTH - bee.WIDTH && bee.beeMoveRight == true) {
+        bee.beeX += bee.VELOCITY;
     }
     // Move Bee Down
-    if (beeY < CANVAS_HEIGHT - BEE_HEIGHT && beeMoveDown == true) {
-        beeY += BEE_VELOCITY;
+    if (bee.beeY < CANVAS_HEIGHT - bee.HEIGHT && bee.beeMoveDown == true) {
+        bee.beeY += bee.VELOCITY;
     }
     // Move Bee Left
-    if (beeX > 0 && beeMoveLeft == true) {
-        beeX -= BEE_VELOCITY;
+    if (bee.beeX > 0 && bee.beeMoveLeft == true) {
+        bee.beeX -= bee.VELOCITY;
     }
+}
+
+/* ------------ Score ---------- */
+
+function renderScore() {
+    ctx.font = "20px Cherry Swash";
+    ctx.fillText(`Score: ${score}`, CANVAS_WIDTH - 100, 20);
 }

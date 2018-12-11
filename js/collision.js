@@ -14,10 +14,10 @@ function checkForCollision() {
             // May not be DRY, but helps to read the logic
             let cX = corners[j].x;
             let cY = corners[j].y;
-            let bXLeft = beeX;
-            let bXRight = beeX + BEE_WIDTH;
-            let bYTop = beeY + 10;
-            let bYBottom = beeY + BEE_HEIGHT; 
+            let bXLeft = bee.beeX;
+            let bXRight = bee.beeX + bee.WIDTH;
+            let bYTop = bee.beeY + 10;
+            let bYBottom = bee.beeY + bee.HEIGHT; 
 
             if (cX >= bXLeft && cX <= bXRight 
             && cY >= bYTop && cY <= bYBottom) {
@@ -25,8 +25,7 @@ function checkForCollision() {
                     break;
                 }
                 flowers[i].pollinated = true;
-                score += 10;
-                console.log(score);
+                score += 1;
             }
         }
     }

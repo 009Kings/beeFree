@@ -1,12 +1,10 @@
 // Constants
-const BEE_HEIGHT = 50;
-const BEE_WIDTH = 60;
-const BEE_VELOCITY = 3.5;
 const BG_WIDTH = 2800;
 const CANVAS_WIDTH = 700;
 const CANVAS_HEIGHT = 350;
 const FLOWER_WIDTH = 50;
 const FLOWER_HEIGHT = 50;
+const GRAVITY = 1;
 
 // Loadings Variables
 var ctx = document.getElementById("game").getContext('2d');
@@ -14,18 +12,23 @@ let images = {};
 let imagesReady = false;
 let flowers = [];
 let flowerNum = 0;
-let maxFlowers = 20;
+let maxFlowers = 30;
 let readiness = {};
 
+let bee = {
+    beeX: 50,
+    beeY: 150,
+    HEIGHT: 50,
+    WIDTH: 60,
+    VELOCITY: 3.5,
+    beeMoveUp: false,
+    beeMoveDown: false,
+    beeMoveLeft: false,
+    beeMoveRight: false,
+    stinger: true, // stinger false means bee is dead
+}
+
 // Coordinate Variables
-
-let beeX = 50;
-let beeY = 150;
-let beeMoveUp;
-let beeMoveDown;
-let beeMoveLeft;
-let beeMoveRight;
-
 let bgXOffset = 0;
 let flowerY;
 let foregroundXOffset = 0;
