@@ -4,7 +4,9 @@ This is my first coding project. I wanted to do a cute, low-violence game that i
 
 ## Getting Started
 
-The first thing I did was a wireframe of what I wanted my game to look like. I wireframed out my minimum viable product since most of my stretch goals still visually fit into that frame. I listed all the state that I would have to track for my MVP to function and all the assets I would need.
+The first thing I did was a wireframe of what I wanted my game to look like. I wireframed out my minimum viable product since most of my stretch goals still visually fit 
+
+into that frame. I listed all the state that I would have to track for my MVP to function and all the assets I would need.
 
 ### Prerequisites
 
@@ -153,6 +155,10 @@ if (bee.y <= CANVAS_HEIGHT - bee.height) {
 ```
 
 Now that I had functional collision mechanics, I added a score that's kept and rendered every tick and changed the image of the flowers if they've been pollinated. The rest of the evening was spent refactoring some code and playing around with css to make my site look slightly more interesting and responsive.
+
+## Tuesday (Day 4)
+
+After having a few people playtest the game the night previous, there was a request to keep it as it was as a sort of "Zen mode", thus pushing my start menu stretch goal to the forefront. First step for that is to create a modial on the canvas that simply initiallises the game.
 
 ## Technology Used:
 

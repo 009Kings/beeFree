@@ -2,10 +2,13 @@ html {
     height: 100%;
 }
 body {
-    min-height: 90%;
+    min-height: 100%;
+    max-height: 100%;
     display: grid;
     background-color: rgb(255, 250, 200);
-    /* position: relative; */
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 100%;
+    margin: 0;
 }
 
 h1, h2 {
@@ -17,22 +20,47 @@ h1, h2 {
 h1 {
     font-family: "Cherry Swash", cursive;
     margin: 0;
-    font-size: 5vw;
+    font-size: 2rem;
 }
 
 h2 {
     font-family: "Julius Sans One", sans-serif;
-    margin: 20px auto;
-    font-size: 3vw;
+    margin: 10px auto;
+    font-size: 1.55rem;
 }
 
 canvas {
     border: 5px solid rgb(124, 49, 61);
     margin: 0 auto;
-    grid-template-rows: 4fr auto;
-
 }
 
 footer {
-   margin: 0 auto;
+    font-family: "Julius Sans One", sans-serif; 
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+    background: rgba(60, 102, 12, 0.384);
+}
+
+.made-by {
+    text-align: right;
+    padding: 0 5px;
+}
+
+.social-media {
+    text-align: left;
+    padding: 5px 5px;
+}
+
+img {
+    height: 1.3em;
+}
+
+.icon {
+    align-self: center;
+    justify-self: center;
+}
+
+.name {
+    font-weight: 800;
 }
