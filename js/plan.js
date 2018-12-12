@@ -26,18 +26,17 @@ function storeScore() {
         for (let i = 0; i < scoreList.length; i++) {
             let parentLi = scoreList[i].parentNode;
             if (gameState.score > scoreList[i].textContent) {
-                console.log(gameState.score + scoreList[i].textContent);
                 scoresDOM.insertBefore(newScore, parentLi);
                 break;
             }
         }
-
-        // if (scoresDOM.childElementCount < 5) {
-        //     scoresDOM.appendChild(newScore);
-        //     return;
-        // } else if (scoresDOM.childElementCount > 5) {
-        //     scoresDOM.removeChild(scoresDOM.lastChild);
-        // }
+        if (scoresDOM.childElementCount < 5) {
+            scoresDOM.appendChild(newScore);
+            return;
+        } 
+        if (scoresDOM.childElementCount > 5) {
+            scoresDOM.removeChild(scoresDOM.lastChild);
+        }
     }
 }
 
