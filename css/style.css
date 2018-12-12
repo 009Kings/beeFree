@@ -26,12 +26,67 @@ h1 {
 h2 {
     font-family: "Julius Sans One", sans-serif;
     margin: 10px auto;
-    font-size: 1.55rem;
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-family: "Cherry Swash", cursive;
+    color: rgba(181, 243, 81, 0.692);
+    font-size: 1.4em;
+}
+
+main {
+    align-items: center;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    align-content: space-around;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.game-and-modal {
+    width: 700px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#start-modal {
+    width: 700px;
+    padding: 5px;
+    height: 350px;
+    position: absolute;
+    top: 0;
+    background: #7C313D;
+}
+
+.modal-content {
+    font-family: "Julius Sans One", sans-serif;
+    padding: 2%;
+    text-align: center;
+    color:  rgb(214, 255, 214);
+    line-height: 1.4em;
+    letter-spacing: .2em;
 }
 
 canvas {
     border: 5px solid rgb(124, 49, 61);
     margin: 0 auto;
+}
+
+#start {
+    height: 50px;
+    width: 350px;
+    justify-self: center;
+    font-family: "Julius Sans One", sans-serif;
+    font-size: 1.2em;
+    font-weight: bolder;
+    background: #7C313D;
+    border-color: #7C313D;
+    color:  rgb(214, 255, 214);
+    margin: 0;
+    grid-row-start: 3 | 1 | auto
 }
 
 footer {

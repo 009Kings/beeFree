@@ -11,11 +11,10 @@ const FPS = 16;
 var ctx = document.getElementById("game").getContext('2d');
 let images = {};
 let imagesReady = false;
-let flowers = [];
-let flowerNum = 0;
 let maxFlowers = 30;
 let readiness = {};
 
+// Game state
 let bee = {
     x: 50,
     y: 150,
@@ -29,10 +28,12 @@ let bee = {
     beeMoveRight: false,
     stinger: true, // stinger false means bee is dead
 }
+let score = 0;
+let gameRunning = false;
+let flowers = [];
+let flowerNum = 0;
 
 // Coordinate Variables
 let bgXOffset = 0;
 let flowerY;
 let foregroundXOffset = 0;
-
-let score = 0;

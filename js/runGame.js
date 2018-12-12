@@ -7,10 +7,34 @@ function load() {
     loadImage("flower1polinated.png", "flower1pollinated");
 }
 
+function init() {
+    bee = {
+        x: 50,
+        y: 150,
+        height: 50,
+        width: 60,
+        wings: 10,
+        velocity: 3.5,
+        beeMoveUp: false,
+        beeMoveDown: false,
+        beeMoveLeft: false,
+        beeMoveRight: false,
+        stinger: true, 
+    }
+    score = 0;
+    gameRunning = false;
+    flowers = [];
+    flowerNum = 0;
+
+    bgXOffset = 0;
+    flowerY;
+    foregroundXOffset = 0;
+}
+
 function startIfReady() {
     // Make sure all the images are ready to load
     for (const key in readiness) {
-        while (readiness.key === false) {
+        if (readiness.key === false) {
             break;
         }
         imagesReady = true;
@@ -31,11 +55,13 @@ function startIfReady() {
 
 // What happens every "frame"
 function tick() {
-    // Update (everything that doesn't rely on an event listener ie. time passing)
-    update();
+    if (gameRunning) {
+        // Update (everything that doesn't rely on an event listener ie. time passing)
+        update();
 
-    // Render
-    render();
+        // Render
+        render();
+    }
 }
 
 // Updates state
@@ -59,3 +85,4 @@ function render() {
     renderForeground();
     renderScore();
 }
+

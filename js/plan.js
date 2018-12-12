@@ -1,3 +1,25 @@
+/* -------- Start the game! Featuring modial -------- */
+
+function start() {
+    let startBtn = document.getElementById("start");
+    startBtn.addEventListener("click", function () {
+        // Set modal status to hidden
+        document.getElementById("start-modal").classList.add("hidden");
+
+        // Set btn status to hidden
+
+        // On click, startIfReady()
+        if(gameRunning === false) {
+            gameRunning = true;
+            startIfReady();
+        } else {
+            gameRunning = false;
+            clearInterval(tick);
+            init();
+        }
+    })
+}
+
 /* ---------------- Helper Function ---------------- */
 
 function loadImage(location, keyName) {

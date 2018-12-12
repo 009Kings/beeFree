@@ -3,5 +3,5 @@
 load();
 
 document.addEventListener("DOMContentLoaded", function(){
-    startIfReady();
+    start();
 })
