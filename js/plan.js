@@ -21,21 +21,23 @@ function storeScore() {
         scoresDOM.appendChild(newScore);
         return;
     } else {
-        // Check the current scores, loop through them and see if your score is greater than those currently on the board
+        // Check the current scores, loop through them and see if your score is greater than those currently on the board, if not, we move on
         let scoreList = document.querySelectorAll(".score-value");
         for (let i = 0; i < scoreList.length; i++) {
             let parentLi = scoreList[i].parentNode;
-            if (gameState.score > scoreList[i].textContent) {
+            if (gameState.score > parseInt(scoreList[i].textContent)) {
                 scoresDOM.insertBefore(newScore, parentLi);
-                break;
+                // If 
+                if (scoresDOM.childElementCount > 5) {
+                    scoresDOM.removeChild(scoresDOM.lastChild);
+                }
+                return;
             }
         }
+        // If the list doesn't have the top 5, then we add the score to the bottom
         if (scoresDOM.childElementCount < 5) {
             scoresDOM.appendChild(newScore);
             return;
-        } 
-        if (scoresDOM.childElementCount > 5) {
-            scoresDOM.removeChild(scoresDOM.lastChild);
         }
     }
 }
@@ -43,7 +45,7 @@ function storeScore() {
 function createScore() {
     var li = document.createElement("li");
     li.setAttribute("class", "score-item");
-    li.textContent = `Your score is `;
+    li.textContent = `You got a high-score of `;
     // Make dat score
     var span = document.createElement("span");
     span.setAttribute("class", "score-value");
