@@ -47,9 +47,11 @@ main {
 }
 
 .game-and-modal {
-    width: 700px;
+    width: 710px;
+    height: 360px;
     margin: 0 auto;
     position: relative;
+    padding: 0;
 }
 
 #start-modal {
@@ -78,15 +80,14 @@ canvas {
 #start {
     height: 50px;
     width: 350px;
-    justify-self: center;
     font-family: "Julius Sans One", sans-serif;
     font-size: 1.2em;
     font-weight: bolder;
     background: #7C313D;
     border-color: #7C313D;
     color:  rgb(214, 255, 214);
-    margin: 0;
-    grid-row-start: 3 | 1 | auto
+    margin: 0 auto;
+    position: relative;
 }
 
 footer {

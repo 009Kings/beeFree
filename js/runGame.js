@@ -23,7 +23,7 @@ function init() {
             stinger: true, // stinger false means bee is dead
         },
         score: 0,
-        gameRunning: false,
+        gameRunning: true,
         flowers: [],
         flowerNum: 0,
     }

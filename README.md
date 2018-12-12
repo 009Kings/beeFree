@@ -154,11 +154,18 @@ if (bee.y <= CANVAS_HEIGHT - bee.height) {
     }
 ```
 
-Now that I had functional collision mechanics, I added a score that's kept and rendered every tick and changed the image of the flowers if they've been pollinated. The rest of the evening was spent refactoring some code and playing around with css to make my site look slightly more interesting and responsive.
+Since I had functional collision mechanics, I added a score that's kept and rendered every tick and changed the image of the flowers if they've been pollinated. The rest of the evening was spent refactoring some code and playing around with css to make my site look slightly more interesting and responsive.
 
 ## Tuesday (Day 4)
 
 After having a few people playtest the game the night previous, there was a request to keep it as it was as a sort of "Zen mode", thus pushing my start menu stretch goal to the forefront. First step for that is to create a modial on the canvas that simply initiallises the game.
+
+I spent a lot of time doing CSS work on this day. I made a modal over the screen and a button that starts the game. I had to make a div container to hold the canvas and the modal so that I could set it's position to relative in order to overlay the modal with absolute positioning. I also made a sticky footer that has links to my Github, LinkedIn, and a place to email me.
+
+## Wednesday (Day 5)
+
+I needed to have a start state which would initialise everytime the game restarted, so I made an empty object and a function to fill it. This seemed like a great idea until I broke the game.
+
 
 ## Technology Used:
 

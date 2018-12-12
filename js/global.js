@@ -15,7 +15,9 @@ let maxFlowers = 30;
 let readiness = {};
 
 // Game state
-let gameState = {};
+let gameState = {
+    gameRunning: false,
+};
 
 // Coordinate Variables
 let bgXOffset = 0;
