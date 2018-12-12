@@ -9,6 +9,7 @@ body {
     grid-template-rows: auto auto 1fr auto;
     grid-template-columns: 100%;
     margin: 0;
+    font-family: "Julius Sans One", sans-serif;
 }
 
 h1, h2 {
@@ -24,7 +25,6 @@ h1 {
 }
 
 h2 {
-    font-family: "Julius Sans One", sans-serif;
     margin: 10px auto;
     font-size: 1.5rem;
 }
@@ -64,7 +64,6 @@ main {
 }
 
 .modal-content {
-    font-family: "Julius Sans One", sans-serif;
     padding: 2%;
     text-align: center;
     color:  rgb(214, 255, 214);
@@ -80,7 +79,6 @@ canvas {
 #start {
     height: 50px;
     width: 350px;
-    font-family: "Julius Sans One", sans-serif;
     font-size: 1.2em;
     font-weight: bolder;
     background: #7C313D;
@@ -88,10 +86,10 @@ canvas {
     color:  rgb(214, 255, 214);
     margin: 0 auto;
     position: relative;
+    font-family: "Julius Sans One", sans-serif;
 }
 
-footer {
-    font-family: "Julius Sans One", sans-serif; 
+footer { 
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;

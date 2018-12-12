@@ -7,6 +7,33 @@ function load() {
     loadImage("flower1polinated.png", "flower1pollinated");
 }
 
+/* -------- Start the game! Featuring modial -------- */
+
+function start() {
+    let startBtn = document.getElementById("start");
+    startBtn.addEventListener("click", function () {
+        // Set modal status to hidden
+        document.getElementById("start-modal").classList.add("hidden");
+
+        // On click, startIfReady()
+        if(gameState.gameRunning === false) {
+            gameState.gameRunning = true;
+            // Change the text to say Restart
+            document.getElementById("start").textContent = "Restart";
+            // Initialise the board
+            init();
+            startIfReady();
+        } else {
+            // Store the Score
+            storeScore();
+
+            // Initialise the board
+            init();
+        }
+    })
+}
+
+
 function init() {
     return gameState = {
         bee: {
@@ -39,9 +66,6 @@ function startIfReady() {
     }
 
     if (imagesReady) {
-        // Initialise the board
-        init();
-        
         // Start listening for imput (Add event listeners only once);
         addListeners();
 

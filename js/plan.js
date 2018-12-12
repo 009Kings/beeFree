@@ -1,25 +1,4 @@
-/* -------- Start the game! Featuring modial -------- */
-
-function start() {
-    let startBtn = document.getElementById("start");
-    startBtn.addEventListener("click", function () {
-        // Set modal status to hidden
-        document.getElementById("start-modal").classList.add("hidden");
-
-        // Set btn status to hidden
-
-        // On click, startIfReady()
-        if(gameState.gameRunning === false) {
-            gameState.gameRunning = true;
-            startIfReady();
-        } else {
-            gameState.gameRunning = false;
-            init();
-        }
-    })
-}
-
-/* ---------------- Helper Function ---------------- */
+/* ---------------- Helper Functions ---------------- */
 
 function loadImage(location, keyName) {
     // Creates background image
@@ -34,6 +13,45 @@ function loadImage(location, keyName) {
     };
 }
 
+function storeScore() {
+    let scoresDOM = document.querySelector("#high-scores");
+    let newScore = createScore();
+    //Insert the li PREFERABLY IN ORDER
+    if (scoresDOM.childElementCount === 0) {
+        scoresDOM.appendChild(newScore);
+        return;
+    } else {
+        // Check the current scores, loop through them and see if your score is greater than those currently on the board
+        let scoreList = document.querySelectorAll(".score-value");
+        for (let i = 0; i < scoreList.length; i++) {
+            let parentLi = scoreList[i].parentNode;
+            if (gameState.score > scoreList[i].textContent) {
+                console.log(gameState.score + scoreList[i].textContent);
+                scoresDOM.insertBefore(newScore, parentLi);
+                break;
+            }
+        }
+
+        // if (scoresDOM.childElementCount < 5) {
+        //     scoresDOM.appendChild(newScore);
+        //     return;
+        // } else if (scoresDOM.childElementCount > 5) {
+        //     scoresDOM.removeChild(scoresDOM.lastChild);
+        // }
+    }
+}
+
+function createScore() {
+    var li = document.createElement("li");
+    li.setAttribute("class", "score-item");
+    li.textContent = `Your score is `;
+    // Make dat score
+    var span = document.createElement("span");
+    span.setAttribute("class", "score-value");
+    span.textContent = `${gameState.score}`;
+    li.appendChild(span);
+    return li;
+}
 /* ---------------- Background ---------------- */
 
 
