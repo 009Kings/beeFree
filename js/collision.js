@@ -1,31 +1,31 @@
 function checkForFlowerCollision() {
 
     // Check All the flowers on the board.
-    for (let i = 0; i < flowers.length; i++) {
+    for (let i = 0; i < gameState.flowers.length; i++) {
         // Lets establish corners
         let corners = [
-            {corner: "topLeft", x : flowers[i].flowerX, y : flowers[i].flowerY},
-            {corner: "topRight", x : flowers[i].flowerX + FLOWER_WIDTH, y : flowers[i].flowerY},
-            {corner: "bottomLeft", x : flowers[i].flowerX, y : flowers[i].flowerY + FLOWER_HEIGHT},
-            {corner: "bottomRight", x : flowers[i].flowerX + FLOWER_WIDTH, y : flowers[i].flowerY + FLOWER_HEIGHT}];
+            {corner: "topLeft", x : gameState.flowers[i].flowerX, y : gameState.flowers[i].flowerY},
+            {corner: "topRight", x : gameState.flowers[i].flowerX + FLOWER_WIDTH, y : gameState.flowers[i].flowerY},
+            {corner: "bottomLeft", x : gameState.flowers[i].flowerX, y : gameState.flowers[i].flowerY + FLOWER_HEIGHT},
+            {corner: "bottomRight", x : gameState.flowers[i].flowerX + FLOWER_WIDTH, y : gameState.flowers[i].flowerY + FLOWER_HEIGHT}];
 
         // Check if any of the corner points is within the bounds of the bee box; 
         for (let j = 0; j < corners.length; j++) {
             // May not be DRY, but helps to read the logic
             let cX = corners[j].x;
             let cY = corners[j].y;
-            let bXLeft = bee.x;
-            let bXRight = bee.x + bee.width;
-            let bYTop = bee.y + 10;
-            let bYBottom = bee.y + bee.height; 
+            let bXLeft = gameState.bee.x;
+            let bXRight = gameState.bee.x + gameState.bee.width;
+            let bYTop = gameState.bee.y + 10;
+            let bYBottom = gameState.bee.y + gameState.bee.height; 
 
             if (cX >= bXLeft && cX <= bXRight 
             && cY >= bYTop && cY <= bYBottom) {
-                if (flowers[i].pollinated === true) {
+                if (gameState.flowers[i].pollinated === true) {
                     break;
                 }
-                flowers[i].pollinated = true;
-                score += 1;
+                gameState.flowers[i].pollinated = true;
+                gameState.score += 1;
             }
         }
     }

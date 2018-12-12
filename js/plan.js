@@ -9,12 +9,11 @@ function start() {
         // Set btn status to hidden
 
         // On click, startIfReady()
-        if(gameRunning === false) {
-            gameRunning = true;
+        if(gameState.gameRunning === false) {
+            gameState.gameRunning = true;
             startIfReady();
         } else {
-            gameRunning = false;
-            clearInterval(tick);
+            gameState.gameRunning = false;
             init();
         }
     })
@@ -65,7 +64,7 @@ function renderForeground() {
 
 function renderScore() {
     ctx.font = "20px Cherry Swash";
-    ctx.fillText(`Score: ${score}`, CANVAS_WIDTH - 110, 20);
+    ctx.fillText(`Score: ${gameState.score}`, CANVAS_WIDTH - 110, 20);
 }
 
 /* ---------------- Flowers ---------------- */
@@ -76,35 +75,36 @@ function generateFlower () {
 }
 
 function addFlower () {
+    
     // Set Random y height in a window
-    flowers[flowerNum] = {};
-    flowers[flowerNum].flowerY = (Math.floor(Math.random() * (CANVAS_HEIGHT - 80)) + 10);
-    flowers[flowerNum].flowerOffset = 0; //unique offset for each flower
-    flowers[flowerNum].randomOffset = Math.ceil(Math.random() * 2) + .5;
-    flowers[flowerNum].pollinated = false;
+    gameState.flowers[gameState.flowerNum] = {};
+    gameState.flowers[gameState.flowerNum].flowerY = (Math.floor(Math.random() * (CANVAS_HEIGHT - 80)) + 10);
+    gameState.flowers[gameState.flowerNum].flowerOffset = 0; //unique offset for each flower
+    gameState.flowers[gameState.flowerNum].randomOffset = Math.ceil(Math.random() * 2) + .5;
+    gameState.flowers[gameState.flowerNum].pollinated = false;
 
     // Make sure the flowers array is no more than the number of max flowers
-    if (flowerNum > maxFlowers) {
-        flowerNum = - 1;
+    if (gameState.flowerNum > maxFlowers) {
+        gameState.flowerNum = - 1;
     }
-    flowerNum ++;
+    gameState.flowerNum ++;
 }
 
 function renderFlower() {
     // Render each flower in our Flowers array
-    for (let i = 0; i < flowers.length; i++) {
-        flowers[i].flowerX = CANVAS_WIDTH + FLOWER_WIDTH - flowers[i].flowerOffset;
+    for (let i = 0; i < gameState.flowers.length; i++) {
+        gameState.flowers[i].flowerX = CANVAS_WIDTH + FLOWER_WIDTH - gameState.flowers[i].flowerOffset;
 
-        if (flowers[i].pollinated === true) {
-            ctx.drawImage(images.flower1pollinated, flowers[i].flowerX, flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
+        if (gameState.flowers[i].pollinated === true) {
+            ctx.drawImage(images.flower1pollinated, gameState.flowers[i].flowerX, gameState. flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
         } else {
-            ctx.drawImage(images.flower1, flowers[i].flowerX, flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
+            ctx.drawImage(images.flower1, gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
         }
     
         /* ------ Debugging purposes -----
         ctx.fillStyle = "chartreuse";
         ctx.beginPath();
-        ctx.rect(flowers[i].flowerX, flowers[i].flowerY, FLOWER_WIDTH, FLOWER_HEIGHT);
+        ctx.rect(gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, FLOWER_WIDTH, FLOWER_HEIGHT);
         ctx.fill()*/
     }
 }
@@ -115,18 +115,18 @@ function renderFlower() {
 function renderBee() {
 
     // Draw the bee
-    ctx.drawImage(images.bee, bee.x, bee.y, 60, 50);
+    ctx.drawImage(images.bee, gameState.bee.x, gameState.bee.y, 60, 50);
 
     /* ------ BEEbugging Purposes ------
     //Bee Box
-    let bXLeft = bee.x;
-    let bXRight = bee.x + bee.width;
-    let bYTop = bee.y + 10;
-    let bYBottom = bee.y + bee.height;
+    let bXLeft = gameState.bee.x;
+    let bXRight = gameState.bee.x + gameState.bee.width;
+    let bYTop = gameState.bee.y + 10;
+    let bYBottom = gameState.bee.y + gameState.bee.height;
     
     ctx.fillStyle = "pink";
     ctx.beginPath();
-    ctx.rect(bXLeft, bYTop, bee.width, bYBottom-bYTop);
+    ctx.rect(bXLeft, bYTop, gameState.bee.width, bYBottom-bYTop);
     ctx.fill()*/
 
     
@@ -149,63 +149,63 @@ function addListeners() {
 function keyDownHandler(e) {
     // Up Arrow
     if(e.keyCode == 38){
-        bee.beeMoveUp = true;
+        gameState.bee.beeMoveUp = true;
     }
     // Right Arrow
     if(e.keyCode == 39){
-        bee.beeMoveRight = true;
+        gameState.bee.beeMoveRight = true;
     }
 
     // Down Arrow
     if(e.keyCode == 40){
-        bee.beeMoveDown = true;
+        gameState.bee.beeMoveDown = true;
     }
 
     // Left Arrow
     if(e.keyCode == 37){
-        bee.beeMoveLeft = true;
+        gameState.bee.beeMoveLeft = true;
     }
 }
 
 function keyUpHandler(e) {
     if(e.keyCode == 38){
-        bee.beeMoveUp = false;
+        gameState.bee.beeMoveUp = false;
     }
     // Right Arrow
     if(e.keyCode == 39){
-        bee.beeMoveRight = false;
+        gameState.bee.beeMoveRight = false;
     }
     // Down Arrow
     if(e.keyCode == 40){
-        bee.beeMoveDown = false;
+        gameState.bee.beeMoveDown = false;
     }
     // Left Arrow
     if(e.keyCode == 37){
-        bee.beeMoveLeft = false;
+        gameState.bee.beeMoveLeft = false;
     }
 }
 
 function moveBee() {
     // GraviBEE
-    if (bee.y <= CANVAS_HEIGHT - bee.height) {
-        bee.y += GRAVITY;
+    if (gameState.bee.y <= CANVAS_HEIGHT - gameState.bee.height) {
+        gameState.bee.y += GRAVITY;
     }
 
     // Move Bee Up
-    if (bee.y > 0 && bee.beeMoveUp == true) {
-        bee.y -= bee.velocity;
+    if (gameState.bee.y > 0 && gameState.bee.beeMoveUp == true) {
+        gameState.bee.y -= gameState.bee.velocity;
     }
     // Move Bee Right
-    if (bee.x < CANVAS_WIDTH - bee.width && bee.beeMoveRight == true) {
-        bee.x += bee.velocity - .5;
+    if (gameState.bee.x < CANVAS_WIDTH - gameState.bee.width && gameState.bee.beeMoveRight == true) {
+        gameState.bee.x += gameState.bee.velocity - .5;
     }
     // Move Bee Down
-    if (bee.y < CANVAS_HEIGHT - bee.height && bee.beeMoveDown == true) {
-        bee.y += bee.velocity;
+    if (gameState.bee.y < CANVAS_HEIGHT - gameState.bee.height && gameState.bee.beeMoveDown == true) {
+        gameState.bee.y += gameState.bee.velocity;
     }
     // Move Bee Left
-    if (bee.x > 0 && bee.beeMoveLeft == true) {
-        bee.x -= bee.velocity + 1;
+    if (gameState.bee.x > 0 && gameState.bee.beeMoveLeft == true) {
+        gameState.bee.x -= gameState.bee.velocity + 1;
     }
 }
 

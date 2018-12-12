@@ -15,23 +15,7 @@ let maxFlowers = 30;
 let readiness = {};
 
 // Game state
-let bee = {
-    x: 50,
-    y: 150,
-    height: 50,
-    width: 60,
-    wings: 10,
-    velocity: 3.5,
-    beeMoveUp: false,
-    beeMoveDown: false,
-    beeMoveLeft: false,
-    beeMoveRight: false,
-    stinger: true, // stinger false means bee is dead
-}
-let score = 0;
-let gameRunning = false;
-let flowers = [];
-let flowerNum = 0;
+let gameState = {};
 
 // Coordinate Variables
 let bgXOffset = 0;
