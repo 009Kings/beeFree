@@ -89,6 +89,17 @@ canvas {
     font-family: "Julius Sans One", sans-serif;
 }
 
+.score-card {
+    margin: 0 auto;
+    width: 350px;
+    text-align: center;
+    list-style-position: inside;
+}
+
+.score-item {
+    margin: 3px;
+}
+
 footer { 
     display: grid;
     grid-template-columns: auto 1fr auto;
