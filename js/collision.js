@@ -21,7 +21,7 @@ function checkForFlowerCollision() {
 
             if (cX >= bXLeft && cX <= bXRight 
             && cY >= bYTop && cY <= bYBottom) {
-                if (gameState.flowers[i].pollinated === true) {
+                if (gameState.flowers[i].pollinated === true || gameState.bee.hasStinger === false) {
                     break;
                 }
                 gameState.flowers[i].pollinated = true;
@@ -32,14 +32,14 @@ function checkForFlowerCollision() {
 }
 
 /* ------- Refactor that code! -------*/
-function checkCollide(object1, object2, wings) {
+function checkCollide(smallerObject, object2, wings1, wings2) {
 
     // Lets establish corners
     let corners = [
-        {corner: "topLeft", x : object1.x, y : object1.y},
-        {corner: "topRight", x : object1.x + object1.width, y : object1.y},
-        {corner: "bottomLeft", x : object1.x, y : object1.y + object1.height},
-        {corner: "bottomRight", x : object1.x + object1.width, y : object1.y + object1.height}];
+        {corner: "topLeft", x : smallerObject.x, y : smallerObject.y + wings1},
+        {corner: "topRight", x : smallerObject.x + smallerObject.width, y : smallerObject.y + wings1},
+        {corner: "bottomLeft", x : smallerObject.x, y : smallerObject.y + smallerObject.height},
+        {corner: "bottomRight", x : smallerObject.x + smallerObject.width, y : smallerObject.y + object1.height}];
 
     // Check if any of the corner points is within the bounds of the bee box; 
     for (let j = 0; j < corners.length; j++) {
@@ -48,7 +48,7 @@ function checkCollide(object1, object2, wings) {
         let cY = corners[j].y;
         let bXLeft = object2.x;
         let bXRight = object2.x + object2.width;
-        let bYTop = object2.y + wings;
+        let bYTop = object2.y + wings2;
         let bYBottom = object2.y + object2.height; 
 
         if (cX >= bXLeft && cX <= bXRight 
@@ -61,7 +61,7 @@ function checkCollide(object1, object2, wings) {
 function checkWaspCollision() {
     let waspArray = gameState.enemies.wasps.waspsNum;
     for (let i = 0; i < waspArray.length; i++) {
-        let collision = checkCollide(gameState.bee, waspArray[i], gameState.enemies.wasps.wingHeight);
+        let collision = checkCollide(gameState.bee, waspArray[i], gameState.bee.wings, gameState.enemies.wasps.wingHeight);
         if (collision == true){
             if (gameState.bee.hasStinger) {
                 gameState.bee.hasStinger = false;

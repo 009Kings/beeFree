@@ -33,7 +33,7 @@ function storeScore() {
         let scoreList = document.querySelectorAll(".score-value");
         for (let i = 0; i < scoreList.length; i++) {
             let parentLi = scoreList[i].parentNode;
-            if (gameState.score > parseInt(scoreList[i].textContent)) {
+            if (gameState.score > scoreList[i].textContent) {
                 scoresDOM.insertBefore(newScore, parentLi);
                 if (scoresDOM.childElementCount > 5) {
                     scoresDOM.removeChild(scoresDOM.lastChild);
@@ -44,7 +44,6 @@ function storeScore() {
         // If the list doesn't have the top 5, then we add the score to the bottom
         if (scoresDOM.childElementCount < 5) {
             scoresDOM.appendChild(newScore);
-            return;
         }
     }
 }
@@ -180,12 +179,13 @@ function renderBee() {
     if (gameState.bee.hasStinger){
         ctx.drawImage(images.bee, gameState.bee.x, gameState.bee.y, 60, 50);
     } else {
+        ctx.drawImage(images.bee, gameState.bee.x, gameState.bee.y, 60, 50);
         // Zoom bee down
         gameState.gravity = 10;
     }
     
 
-    /* ------ BEEbugging Purposes ------
+    /* ------ BEEbugging Purposes ------ */
     //Bee Box
     let bXLeft = gameState.bee.x;
     let bXRight = gameState.bee.x + gameState.bee.width;
@@ -195,7 +195,7 @@ function renderBee() {
     ctx.fillStyle = "pink";
     ctx.beginPath();
     ctx.rect(bXLeft, bYTop, gameState.bee.width, bYBottom-bYTop);
-    ctx.fill()*/
+    ctx.fill()
 
     
 }
@@ -213,10 +213,10 @@ function addListeners() {
 
 }
 
-function removeListeners() {
-    document.removeEventListener("keydown", keyDownHandler, false);
-    document.removeEventListener("keyup", keyUpHandler, false);
-}
+// function removeListeners() {
+//     document.removeEventListener("keydown", keyDownHandler, false);
+//     document.removeEventListener("keyup", keyUpHandler, false);
+// }
 
 function keyDownHandler(e) {
     // Up Arrow
@@ -262,22 +262,23 @@ function moveBee() {
     if (gameState.bee.y <= CANVAS_HEIGHT - gameState.bee.height) {
         gameState.bee.y += gameState.gravity;
     }
-
-    // Move Bee Up
-    if (gameState.bee.y > 0 && gameState.bee.beeMoveUp == true) {
-        gameState.bee.y -= gameState.bee.velocity;
-    }
-    // Move Bee Right
-    if (gameState.bee.x < CANVAS_WIDTH - gameState.bee.width && gameState.bee.beeMoveRight == true) {
-        gameState.bee.x += gameState.bee.velocity - .5;
-    }
-    // Move Bee Down
-    if (gameState.bee.y < CANVAS_HEIGHT - gameState.bee.height && gameState.bee.beeMoveDown == true) {
-        gameState.bee.y += gameState.bee.velocity;
-    }
-    // Move Bee Left
-    if (gameState.bee.x > 0 && gameState.bee.beeMoveLeft == true) {
-        gameState.bee.x -= gameState.bee.velocity + 1;
+    if (gameState.bee.hasStinger) {
+        // Move Bee Up
+        if (gameState.bee.y > 0 && gameState.bee.beeMoveUp == true) {
+            gameState.bee.y -= gameState.bee.velocity;
+        }
+        // Move Bee Right
+        if (gameState.bee.x < CANVAS_WIDTH - gameState.bee.width && gameState.bee.beeMoveRight == true) {
+            gameState.bee.x += gameState.bee.velocity - .5;
+        }
+        // Move Bee Down
+        if (gameState.bee.y < CANVAS_HEIGHT - gameState.bee.height && gameState.bee.beeMoveDown == true) {
+            gameState.bee.y += gameState.bee.velocity;
+        }
+        // Move Bee Left
+        if (gameState.bee.x > 0 && gameState.bee.beeMoveLeft == true) {
+            gameState.bee.x -= gameState.bee.velocity + 1;
+        }
     }
 }
 

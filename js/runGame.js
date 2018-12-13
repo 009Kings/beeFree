@@ -157,5 +157,5 @@ function render() {
 
 function gameOver() {
     console.log("Bee dead!");
-    removeListeners();
+    // removeListeners();
 }

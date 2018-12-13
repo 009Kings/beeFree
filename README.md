@@ -166,6 +166,64 @@ I spent a lot of time doing CSS work on this day. I made a modal over the screen
 
 I needed to have a start state which would initialise everytime the game restarted, so I made an empty object and a function to fill it. This seemed like a great idea until I broke the game.
 
+![What a fun screen that isn't!](https://raw.githubusercontent.com/009kings/beeFree/master/readmeImg/noGame.png)
+
+The fix is to start out the gameState.gameRunning to be false (because it's not running), that way when init() is called it initialises it to true, thus starting the game.
+
+Always avoiding the death of my beloved bee, I decided to work on literally anything else, so I moved on to scoring. I wanted to make sure that I only had the top five scores and had them in order. I created a function to make my <li> components that also included a span of the score itself for easy comparison purposes.
+```
+function createScore() {
+    var li = document.createElement("li");
+    li.setAttribute("class", "score-item");
+    li.textContent = `You got a high-score of `;
+    // Make dat score
+    var span = document.createElement("span");
+    span.setAttribute("class", "score-value");
+    span.textContent = `${gameState.score}`;
+    li.appendChild(span);
+    return li;
+}
+```
+
+Then, in order to place it appropriately, I wrote a function that runs through if statements on if statements!
+
+For reference: scoresDOM accesses my ol element in my HTML file and newScore calls my createScore helper function.
+
+On the first if of functionmas, my true love asked of me, "are there any children in your scoresDom?"
+```
+    if (scoresDOM.childElementCount === 0) {
+        scoresDOM.appendChild(newScore);
+        return;
+    }
+```
+If there aren't zero children, than there must be intiger children! The else basically creates a nodeList of all SCORES on the high-scores board (which is why I have that span over the scores in my createScore section), loops through them and checks if your score is greater than those currently on the board. If so, it adds the new score above.
+```
+    else {
+        let scoreList = document.querySelectorAll(".score-value");
+        for (let i = 0; i < scoreList.length; i++) {
+            let parentLi = scoreList[i].parentNode;
+            if (gameState.score > scoreList[i].textContent) {
+                scoresDOM.insertBefore(newScore, parentLi);
+```
+You might think that's the last of it, but if you keep getting higher scores, then your list keeps getting bigger and bigger and bigger, so how to solve this problem? Remove the last child if there are more than five! Turns out this if statement needs to go right after the insertBefore otherwise we get all sorts of funky problems.
+```
+                if (scoresDOM.childElementCount > 5) {
+                    scoresDOM.removeChild(scoresDOM.lastChild);
+                }
+```
+So you got a new score, it's not higher than any of the current children of my <ol>, what to do now? Well, if there are less than five scores on the board, then you get a spot! But if there are already five on the board and your score hasn't been put on the board yet, than tough cookies, nothing happens.
+
+And all that logic and bug fixing took about 200% longer than anticipated. After the organised list runaround, it was about halfway through the day, and I was introduced to emojis in my git-commits, thus driving me to make my commits as chessy as my game. You can see the time-window of this discovery in my commits.
+
+After much feet dragging and doing anything else, I finally added a lose condition; the bee's impermanence finally came to fruition in the shape of chartreuse coloured box-wasps. Through implimenting the wasp collision detection, I found a couple of fixes to be made in my refactered collision code, but came out with more widely applicable code.
+
+After making sure the bee could die, I implimented a radio button in the start modal so that you could start the game in Zen mode should you feel so inclined.
+
+![Zen Mode or Regular mode? The choice is yours with a simple click of a radio button](https://raw.githubusercontent.com/009kings/beeFree/master/readmeImg/radioZen.png)
+
+## Thursday (Day 6)
+
+
 
 ## Technology Used:
 
