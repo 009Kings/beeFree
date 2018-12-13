@@ -16,7 +16,6 @@ function start() {
     startBtn.addEventListener("click", function () {
         // Set modal status to hidden
         document.getElementById("start-modal").classList.add("hidden");
-
         // On click, startIfReady()
         if(gameState.gameRunning === false) {
             gameState.gameRunning = true;
@@ -24,6 +23,13 @@ function start() {
             document.getElementById("start").textContent = "Restart";
             // Initialise the board
             init();
+            // Check if Zen mode is pressed
+            if (document.getElementById("zen-mode").checked) {
+                for (const key in gameState.enemies) {
+                    gameState.enemies[key].inGame = false;
+                }
+            }
+
             startIfReady();
         } else {
             // Store the Score
@@ -31,13 +37,14 @@ function start() {
 
             // Initialise the board
             init();
+            addListeners();
         }
     })
 }
 
-
 function init() {
     return gameState = {
+        gravity: 1,
         bee: {
             x: 50,
             y: 150,
@@ -57,9 +64,10 @@ function init() {
         flowerNum: 0,
         enemies: {
             wasps: {
-                inGame: false,
+                inGame: true,
                 width: 70,
                 height: 55,
+                wingHeight: 10,
                 maxWasps: 10,
                 waspsNum: [],
             },
@@ -96,8 +104,9 @@ function startIfReady() {
         generateFlower();
 
         //WASPS
-        generateWasps();
-
+        if (gameState.enemies.wasps.inGame === true) {
+            generateWasps();
+        }
     }  
 }
 
@@ -133,6 +142,7 @@ function update() {
     moveBee(); 
 
     checkForFlowerCollision();
+    checkWaspCollision();
 }
 
 function render() {
@@ -145,3 +155,7 @@ function render() {
     renderScore();
 }
 
+function gameOver() {
+    console.log("Bee dead!");
+    removeListeners();
+}

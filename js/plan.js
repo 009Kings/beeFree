@@ -137,14 +137,12 @@ function renderFlower() {
 
 /* ---------------- WASP ---------------- */
 
-// Add wasps to the gameState.enemies object, maybe an array, maybe an object.
-//gameState.enemies.wasps = [];
-
 // Randomly generate a WASP
 function generateWasps() {
-    gameState.enemies.wasps.inGame = true;
-    addWasp();
-    setTimeout(generateWasps, 3000 + (Math.random() * 7000));
+    if (gameState.enemies.wasps.inGame) {
+        addWasp();
+        setTimeout(generateWasps, 3000 + (Math.random() * 7000)); 
+    }
 }
 
 function addWasp() {
@@ -153,6 +151,8 @@ function addWasp() {
     newWasp.y = generateXField();
     newWasp.offsetBase = 0;
     newWasp.randomOffset = randomRange(5, 2);
+    newWasp.width = gameState.enemies.wasps.width;
+    newWasp.height = gameState.enemies.wasps.height;
     if (waspsArray.length > gameState.enemies.wasps.masWasps) {
         waspsArray.shift();
     } 
@@ -177,7 +177,13 @@ function renderWasp() {
 function renderBee() {
 
     // Draw the bee
-    ctx.drawImage(images.bee, gameState.bee.x, gameState.bee.y, 60, 50);
+    if (gameState.bee.hasStinger){
+        ctx.drawImage(images.bee, gameState.bee.x, gameState.bee.y, 60, 50);
+    } else {
+        // Zoom bee down
+        gameState.gravity = 10;
+    }
+    
 
     /* ------ BEEbugging Purposes ------
     //Bee Box
@@ -197,7 +203,6 @@ function renderBee() {
 /* ----- Bee Movement ----- */
 
 function addListeners() {
-    
     // add event listeners for keyboard
     document.addEventListener("keydown", keyDownHandler, false);
     
@@ -206,6 +211,11 @@ function addListeners() {
 
     // add event listeners for touch : MOBILE FUTURE DEVELOPMENT
 
+}
+
+function removeListeners() {
+    document.removeEventListener("keydown", keyDownHandler, false);
+    document.removeEventListener("keyup", keyUpHandler, false);
 }
 
 function keyDownHandler(e) {
@@ -250,7 +260,7 @@ function keyUpHandler(e) {
 function moveBee() {
     // GraviBEE
     if (gameState.bee.y <= CANVAS_HEIGHT - gameState.bee.height) {
-        gameState.bee.y += GRAVITY;
+        gameState.bee.y += gameState.gravity;
     }
 
     // Move Bee Up

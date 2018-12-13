@@ -4,7 +4,6 @@ const CANVAS_WIDTH = 700;
 const CANVAS_HEIGHT = 350;
 const FLOWER_WIDTH = 50;
 const FLOWER_HEIGHT = 50;
-const GRAVITY = 1;
 const FPS = 16;
 
 // Loadings Variables

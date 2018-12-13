@@ -32,7 +32,7 @@ function checkForFlowerCollision() {
 }
 
 /* ------- Refactor that code! -------*/
-function checkCollide(object1, object2) {
+function checkCollide(object1, object2, wings) {
 
     // Lets establish corners
     let corners = [
@@ -48,12 +48,27 @@ function checkCollide(object1, object2) {
         let cY = corners[j].y;
         let bXLeft = object2.x;
         let bXRight = object2.x + object2.width;
-        let bYTop = object2.y + object2;
+        let bYTop = object2.y + wings;
         let bYBottom = object2.y + object2.height; 
 
         if (cX >= bXLeft && cX <= bXRight 
         && cY >= bYTop && cY <= bYBottom) {
             return true;
+        }
+    }
+}
+
+function checkWaspCollision() {
+    let waspArray = gameState.enemies.wasps.waspsNum;
+    for (let i = 0; i < waspArray.length; i++) {
+        let collision = checkCollide(gameState.bee, waspArray[i], gameState.enemies.wasps.wingHeight);
+        if (collision == true){
+            if (gameState.bee.hasStinger) {
+                gameState.bee.hasStinger = false;
+
+                // Run game over setting
+                gameOver();
+            }
         }
     }
 }
