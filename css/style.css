@@ -54,12 +54,13 @@ main {
     padding: 0;
 }
 
-#start-modal {
-    width: 700px;
+.modal {
+    width: 680px;
     padding: 5px;
-    height: 350px;
+    height: 330px;
     position: absolute;
-    top: 0;
+    top: 10px;
+    left: 10px;
     background: #7C313D;
 }
 

@@ -94,7 +94,9 @@ function renderScore() {
 
 /* ---------------- Flowers ---------------- */
 function generateFlower () {
-    addFlower();
+    if (document.hasFocus()) {
+        addFlower();
+    }
     // 500 is my minimum. 2000 is my max space between flowers.
     setTimeout(generateFlower, 500 + (Math.random() * 1500));
 }
@@ -138,10 +140,10 @@ function renderFlower() {
 
 // Randomly generate a WASP
 function generateWasps() {
-    if (gameState.enemies.wasps.inGame) {
-        addWasp();
-        setTimeout(generateWasps, 3000 + (Math.random() * 7000)); 
+    if (gameState.enemies.wasps.inGame && document.hasFocus()) {
+        addWasp(); 
     }
+    setTimeout(generateWasps, 3000 + (Math.random() * 7000));
 }
 
 function addWasp() {
@@ -174,7 +176,6 @@ function renderWasp() {
 /* ---------------- Bee ---------------- */
 
 function renderBee() {
-
     // Draw the bee
     if (gameState.bee.hasStinger){
         ctx.drawImage(images.bee, gameState.bee.x, gameState.bee.y, 60, 50);
@@ -213,46 +214,36 @@ function addListeners() {
 
 }
 
-// function removeListeners() {
-//     document.removeEventListener("keydown", keyDownHandler, false);
-//     document.removeEventListener("keyup", keyUpHandler, false);
-// }
-
 function keyDownHandler(e) {
-    // Up Arrow
-    if(e.keyCode == 38){
+    // W
+    if(e.keyCode == 87){
         gameState.bee.beeMoveUp = true;
     }
-    // Right Arrow
-    if(e.keyCode == 39){
+    // D
+    if(e.keyCode == 68){
         gameState.bee.beeMoveRight = true;
     }
-
-    // Down Arrow
-    if(e.keyCode == 40){
+    // S
+    if(e.keyCode == 83){
         gameState.bee.beeMoveDown = true;
     }
-
-    // Left Arrow
-    if(e.keyCode == 37){
+    // A
+    if(e.keyCode == 65){
         gameState.bee.beeMoveLeft = true;
     }
 }
 
 function keyUpHandler(e) {
-    if(e.keyCode == 38){
+    if(e.keyCode == 87){
         gameState.bee.beeMoveUp = false;
     }
-    // Right Arrow
-    if(e.keyCode == 39){
+    if(e.keyCode == 68){
         gameState.bee.beeMoveRight = false;
     }
-    // Down Arrow
-    if(e.keyCode == 40){
+    if(e.keyCode == 83){
         gameState.bee.beeMoveDown = false;
     }
-    // Left Arrow
-    if(e.keyCode == 37){
+    if(e.keyCode == 65){
         gameState.bee.beeMoveLeft = false;
     }
 }

@@ -112,7 +112,7 @@ function startIfReady() {
 
 // What happens every "frame"
 function tick() {
-    if (gameState.gameRunning) {
+    if (gameState.gameRunning && document.hasFocus()) {
         // Update (everything that doesn't rely on an event listener ie. time passing)
         update();
 

@@ -20,13 +20,19 @@
             <div id="start-modal" class="modal">
                     <div class="modal-content">
                         <h3>How to Play</h3>
-                        <p>Help Mr. Bee in his mission to pollinate as many flowers as he can! Use your arrow keys to fly though the world and land on the flowers you pass.</p>
+                        <p>Help Mr. Bee in his mission to pollinate as many flowers as he can! Use "W" to move up, "A" to move left, "S" to move down, and "D" to move right. Fly though the world and land on the flowers you pass.</p>
                         <input type="radio" name="mode" id="zen-mode" value="Zen Mode">
                             <label for="zen-mode">Zen Mode</label>
                         <input type="radio" name="mode" id="regular-mode" value="Regular Mode" checked>
                             <label for="regular-mode">Regular Mode</label>
-                        <p>But watch out for dangers, as the life of a bee can be short with only one stinger.</p>
+                        <p id="its-dangerous">Watch out for dangers, as the life of a bee can be short with only one stinger.</p>
                     </div>
+            </div>
+            <div id="GO-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h3>GAME OVER</h3>
+                    <p>Sorry for your loss, everything is impermanent, but you can pick yourself up again by restarting. Who knows, your score could 🐝 higher!.</p>
+                </div>
             </div>
         </div>
         <button id="start"> Start the game!</button>

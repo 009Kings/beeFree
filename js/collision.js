@@ -39,7 +39,7 @@ function checkCollide(smallerObject, object2, wings1, wings2) {
         {corner: "topLeft", x : smallerObject.x, y : smallerObject.y + wings1},
         {corner: "topRight", x : smallerObject.x + smallerObject.width, y : smallerObject.y + wings1},
         {corner: "bottomLeft", x : smallerObject.x, y : smallerObject.y + smallerObject.height},
-        {corner: "bottomRight", x : smallerObject.x + smallerObject.width, y : smallerObject.y + object1.height}];
+        {corner: "bottomRight", x : smallerObject.x + smallerObject.width, y : smallerObject.y + smallerObject.height}];
 
     // Check if any of the corner points is within the bounds of the bee box; 
     for (let j = 0; j < corners.length; j++) {
