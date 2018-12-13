@@ -5,6 +5,8 @@ function load() {
     loadImage("bee1.png", "bee");
     loadImage("flower1.png", "flower1");
     loadImage("flower1polinated.png", "flower1pollinated");
+    // loadImage("wasp.png", "wasp");
+    // loadImage("deadBee.png", "deadBee");
 }
 
 /* -------- Start the game! Featuring modial -------- */
@@ -47,12 +49,30 @@ function init() {
             beeMoveDown: false,
             beeMoveLeft: false,
             beeMoveRight: false,
-            stinger: true, // stinger false means bee is dead
+            hasStinger: true, // stinger false means bee is dead
         },
         score: 0,
         gameRunning: true,
         flowers: [],
         flowerNum: 0,
+        enemies: {
+            wasps: {
+                inGame: false,
+                width: 70,
+                height: 55,
+                maxWasps: 10,
+                waspsNum: [],
+            },
+            dasBoot: {
+                inGame: false,
+            },
+            windGusts: {
+                inGame: false,
+            },
+            wateringCan: {
+                inGame: false,
+            }
+        },
     }
 }
 
@@ -75,6 +95,9 @@ function startIfReady() {
         // Create flowers at an interval determined by generate flower
         generateFlower();
 
+        //WASPS
+        generateWasps();
+
     }  
 }
 
@@ -92,11 +115,21 @@ function tick() {
 // Updates state
 function update() {
     // Zoomies of various things
+    //Scenery
     bgXOffset += .5;
     foregroundXOffset += 4;
+
+    // Flowers
     for (let i = 0; i < gameState.flowers.length; i++) {
         gameState.flowers[i].flowerOffset += gameState.flowers[i].randomOffset; 
     } 
+
+    // WASPS
+    let waspArray = gameState.enemies.wasps.waspsNum;
+    for (let i = 0; i < waspArray.length; i++) {
+        waspArray[i].offsetBase += waspArray[i].randomOffset;
+    }
+
     moveBee(); 
 
     checkForFlowerCollision();
@@ -107,6 +140,7 @@ function render() {
     renderBackground();
     renderFlower();
     renderBee();
+    renderWasp();
     renderForeground();
     renderScore();
 }

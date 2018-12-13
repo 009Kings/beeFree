@@ -13,6 +13,14 @@ function loadImage(location, keyName) {
     };
 }
 
+function generateXField() {
+    return (Math.floor(Math.random() * (CANVAS_HEIGHT - 80)) + 10);
+}
+
+function randomRange (maxMinusMin, minMinusOne) {
+    return Math.ceil(Math.random() * maxMinusMin) + minMinusOne;
+}
+
 function storeScore() {
     let scoresDOM = document.querySelector("#high-scores");
     let newScore = createScore();
@@ -27,7 +35,6 @@ function storeScore() {
             let parentLi = scoreList[i].parentNode;
             if (gameState.score > parseInt(scoreList[i].textContent)) {
                 scoresDOM.insertBefore(newScore, parentLi);
-                // If 
                 if (scoresDOM.childElementCount > 5) {
                     scoresDOM.removeChild(scoresDOM.lastChild);
                 }
@@ -97,9 +104,9 @@ function addFlower () {
     
     // Set Random y height in a window
     gameState.flowers[gameState.flowerNum] = {};
-    gameState.flowers[gameState.flowerNum].flowerY = (Math.floor(Math.random() * (CANVAS_HEIGHT - 80)) + 10);
+    gameState.flowers[gameState.flowerNum].flowerY = generateXField();
     gameState.flowers[gameState.flowerNum].flowerOffset = 0; //unique offset for each flower
-    gameState.flowers[gameState.flowerNum].randomOffset = Math.ceil(Math.random() * 2) + .5;
+    gameState.flowers[gameState.flowerNum].randomOffset = randomRange(3, .5);
     gameState.flowers[gameState.flowerNum].pollinated = false;
 
     // Make sure the flowers array is no more than the number of max flowers
@@ -115,7 +122,7 @@ function renderFlower() {
         gameState.flowers[i].flowerX = CANVAS_WIDTH + FLOWER_WIDTH - gameState.flowers[i].flowerOffset;
 
         if (gameState.flowers[i].pollinated === true) {
-            ctx.drawImage(images.flower1pollinated, gameState.flowers[i].flowerX, gameState. flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
+            ctx.drawImage(images.flower1pollinated, gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
         } else {
             ctx.drawImage(images.flower1, gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
         }
@@ -125,6 +132,42 @@ function renderFlower() {
         ctx.beginPath();
         ctx.rect(gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, FLOWER_WIDTH, FLOWER_HEIGHT);
         ctx.fill()*/
+    }
+}
+
+/* ---------------- WASP ---------------- */
+
+// Add wasps to the gameState.enemies object, maybe an array, maybe an object.
+//gameState.enemies.wasps = [];
+
+// Randomly generate a WASP
+function generateWasps() {
+    gameState.enemies.wasps.inGame = true;
+    addWasp();
+    setTimeout(generateWasps, 3000 + (Math.random() * 7000));
+}
+
+function addWasp() {
+    let waspsArray = gameState.enemies.wasps.waspsNum;
+    let newWasp = {};
+    newWasp.y = generateXField();
+    newWasp.offsetBase = 0;
+    newWasp.randomOffset = randomRange(5, 2);
+    if (waspsArray.length > gameState.enemies.wasps.masWasps) {
+        waspsArray.shift();
+    } 
+    waspsArray.push(newWasp);
+}
+
+function renderWasp() {
+    let waspArray = gameState.enemies.wasps.waspsNum;
+    for (let i = 0; i < waspArray.length; i++) {
+        waspArray[i].x = CANVAS_WIDTH + gameState.enemies.wasps.width - waspArray[i].offsetBase;
+
+        ctx.fillStyle = "chartreuse";
+        ctx.beginPath();
+        ctx.rect(waspArray[i].x, waspArray[i].y, gameState.enemies.wasps.width, gameState.enemies.wasps.height);
+        ctx.fill()
     }
 }
 
