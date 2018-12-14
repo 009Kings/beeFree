@@ -28,18 +28,18 @@ function checkForFlowerCollision() {
                 gameState.score += 1;
 
                 //Lock the bee to flower's x/y?
-                let diffX = Math.round(gameState.flowers[i].flowerX - gameState.bee.x);
-                let diffY = Math.round(gameState.flowers[i].flowerY - gameState.bee.y);
+                let numOfFrames = 1 + (gameState.pauseMS/FPS);
+                let flowerOffset = numOfFrames * gameState.flowers[i].randomOffset;
+                let destinationX = gameState.flowers[i].flowerX - flowerOffset;
 
-                
+                /* WOULDN'T IT BE NICE (6 hours on this and nothing works, so I'll put it down)
                 let beePause = setInterval(function(){
-                    console.log(`In beePause, flower is flower${i} diffX is ${diffX} and diffY is ${diffY}.`)
-
-                    snapBee(gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, diffX, diffY, gameState.flowers[i].randomOffset);
+                    snapBee(destinationX, gameState.flowers[i].flowerY, gameState.flowers[i].randomOffset);
                 }, FPS);
                 setTimeout(function () {
                     clearInterval(beePause);
-                }, 400);
+                }, gameState.pauseMS);
+                */
             }
         }
     }

@@ -336,30 +336,20 @@ function moveBee() {
     }
 }
 
-function snapBee(x, y, diffX, diffY, offset) {
-    console.log(`Flower x=${x}, flower y=${y}, bee x=${gameState.bee.x}, bee y=${gameState.bee.y}`);
-    if (gameState.bee.x != x || gameState.bee.y != y) {
-        if (gameState.bee.x <= 0 || gameState.bee.x >= CANVAS_WIDTH - gameState.bee.width) { // prevents going off board
-            console.log("First ifX = Don't go off the board!");
-            return;
-        } else if (gameState.bee.x >= (x - 60) && gameState.bee.x <= (x - 58)) {
-            gameState.bee.x = gameState.bee.x + (Math.round(diffX / 10) - offset);
-            console.log(`2nd ifX = FlowerX is at ${x} Bee x is at ${gameState.bee.x}`);
-        } else {
-            gameState.bee.x = x - 60;
-            console.log(`3rd ifX = Bee x is at ${gameState.bee.x} and the flower x is at ${x}`);
-        }
-
-        if (gameState.bee.y != (y - 75)) {
-            gameState.bee.y = gameState.bee.y + (Math.round(diffY / 10) - offset);
-            console.log(`1st ifY = FlowerY is at ${y} Bee y is at ${gameState.bee.y}`);
-        } else {
-            gameState.bee.y = y - 75;
-            console.log(`2nd ifY = Bee y is at ${gameState.bee.y} and the flower y is at ${y}`);
-        }
+/* WOULDN'T IT BE NICE (6 hours on this and nothing works, so I'll put it down)
+function snapBee(destinationX, destinationY, xOffset) {
+    gameState.bee.y = destinationY;
+    if (destinationX < 0) {
+        return;
+    } else if (gameState.bee.x > destinationX) {
+        gameState.bee.x -= xOffset;
+        gameState.bee.beeMoveUp = false;
+        gameState.bee.beeMoveDown = false;
+        gameState.bee.beeMoveLeft = false;
+        gameState.bee.beeMoveRight = false;
     }
 }
-
+*/
 /*
 function launchBee(x, y) {
 
