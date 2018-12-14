@@ -59,8 +59,44 @@ function createScore() {
     li.appendChild(span);
     return li;
 }
-/* ---------------- Background ---------------- */
 
+/* ---------------- Start/Reset Button ---------------- */
+
+function addStartListeners() {
+    let startBtn = document.getElementById("start");
+    startBtn.addEventListener("click", function () {
+        // Set Start modal status to hidden
+        document.getElementById("start-modal").classList.add("hidden");
+        document.getElementById("start").classList.add("hidden");
+        // On click, startIfReady()
+        if(gameState.gameRunning === false) {
+            gameState.gameRunning = true;
+            // Change the text to say Restart
+            document.getElementById("start").textContent = "Restart";
+            // Initialise the board
+            init();
+            // Check if Zen mode is pressed
+            if (document.getElementById("zen-mode").checked) {
+                gameState.mode = "zen";
+                for (const key in gameState.enemies) {
+                    gameState.enemies[key].inGame = false;
+                }
+            }
+
+            startIfReady();
+        } else {
+            // Store the Score
+            storeScore();
+
+            // Initialise the board
+            document.getElementById("GO-modal").classList.add("hidden");
+            init();
+            addListeners();
+        }
+    })
+}
+
+/* ---------------- Background ---------------- */
 
 function renderBackground() {
     // establish x coordinates and the "stepper" which is when the animation loops

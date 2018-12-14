@@ -61,7 +61,16 @@ main {
     position: absolute;
     top: 10px;
     left: 10px;
-    background: #7C313D;
+    background: rgb(124, 49, 61);
+}
+
+#GO-modal {
+    width: 400px;
+    height: 320px; 
+    top: 12px;
+    left: 150px;
+    background-color: rgba(124, 49, 61, 0.7);
+    border: 4px solid #660c2b;
 }
 
 .modal-content {

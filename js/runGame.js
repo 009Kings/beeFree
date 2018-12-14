@@ -12,39 +12,15 @@ function load() {
 /* -------- Start the game! Featuring modial -------- */
 
 function start() {
-    let startBtn = document.getElementById("start");
-    startBtn.addEventListener("click", function () {
-        // Set modal status to hidden
-        document.getElementById("start-modal").classList.add("hidden");
-        // On click, startIfReady()
-        if(gameState.gameRunning === false) {
-            gameState.gameRunning = true;
-            // Change the text to say Restart
-            document.getElementById("start").textContent = "Restart";
-            // Initialise the board
-            init();
-            // Check if Zen mode is pressed
-            if (document.getElementById("zen-mode").checked) {
-                for (const key in gameState.enemies) {
-                    gameState.enemies[key].inGame = false;
-                }
-            }
-
-            startIfReady();
-        } else {
-            // Store the Score
-            storeScore();
-
-            // Initialise the board
-            init();
-            addListeners();
-        }
-    })
+    addStartListeners()
 }
 
 function init() {
     return gameState = {
         gravity: 1,
+        score: 0,
+        mode: "regular",
+        gameRunning: true,
         bee: {
             x: 50,
             y: 150,
@@ -58,8 +34,6 @@ function init() {
             beeMoveRight: false,
             hasStinger: true, // stinger false means bee is dead
         },
-        score: 0,
-        gameRunning: true,
         flowers: [],
         flowerNum: 0,
         enemies: {
@@ -147,15 +121,18 @@ function update() {
 
 function render() {
     // MUST RENDER IN ORDER OF LAYERS
-    renderBackground();
-    renderFlower();
-    renderBee();
-    renderWasp();
-    renderForeground();
-    renderScore();
+        renderBackground();
+        renderFlower();
+        renderBee();
+        renderWasp();
+        renderForeground();
+        renderScore();
 }
 
 function gameOver() {
     console.log("Bee dead!");
-    // removeListeners();
+    //Get Game-Over Modal and reinstate the button!
+    let GOModal = document.getElementById("GO-modal");
+    GOModal.classList.remove("hidden");
+    document.getElementById("start").classList.remove("hidden");
 }
