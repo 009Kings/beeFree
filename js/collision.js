@@ -28,18 +28,20 @@ function checkForFlowerCollision() {
                 gameState.score += 1;
 
                 //Lock the bee to flower's x/y?
+                gameState.bee.beePause = true;
+
                 let numOfFrames = 1 + (gameState.pauseMS/FPS);
                 let flowerOffset = numOfFrames * gameState.flowers[i].randomOffset;
                 let destinationX = gameState.flowers[i].flowerX - flowerOffset;
 
-                /* WOULDN'T IT BE NICE (6 hours on this and nothing works, so I'll put it down)
                 let beePause = setInterval(function(){
-                    snapBee(destinationX, gameState.flowers[i].flowerY, gameState.flowers[i].randomOffset);
+
+                    snapBee(destinationX, gameState.flowers[i].flowerY, gameState.flowers[i].randomOffset, gameState.bee.y - gameState.flowers[i].flowerY);
                 }, FPS);
                 setTimeout(function () {
                     clearInterval(beePause);
+                    gameState.bee.beePause = false;
                 }, gameState.pauseMS);
-                */
             }
         }
     }

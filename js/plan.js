@@ -312,44 +312,55 @@ function keyUpHandler(e) {
 }
 
 function moveBee() {
+    if (gameState.bee.x <= 0) {
+        gameState.bee.x = 0;
+    }
+    if (gameState.bee.y <= 0) {
+        gameState.bee.y = 0;
+    }
+    if (gameState.bee.x >= CANVAS_WIDTH - gameState.bee.width) {
+        gameState.bee.x = CANVAS_WIDTH - gameState.bee.width;
+    }
+    if (gameState.bee.y >= CANVAS_HEIGHT - gameState.bee.height) {
+        gameState.bee.y = CANVAS_HEIGHT - gameState.bee.height;
+    }
     // GraviBEE
-    if (gameState.bee.y <= CANVAS_HEIGHT - gameState.bee.height) {
+    if (gameState.bee.y <= CANVAS_HEIGHT - gameState.bee.height && gameState.bee.beePause != true) {
         gameState.bee.y += gameState.gravity;
     }
     if (gameState.bee.hasStinger && gameState.mode != "Game Over") {
         // Move Bee Up
-        if (gameState.bee.y > 0 && gameState.bee.beeMoveUp == true) {
+        if (gameState.bee.beeMoveUp == true) {
             gameState.bee.y -= gameState.bee.velocity;
         }
         // Move Bee Right
-        if (gameState.bee.x < CANVAS_WIDTH - gameState.bee.width && gameState.bee.beeMoveRight == true) {
+        if (gameState.bee.beeMoveRight == true) {
             gameState.bee.x += gameState.bee.velocity - .5;
         }
         // Move Bee Down
-        if (gameState.bee.y < CANVAS_HEIGHT - gameState.bee.height && gameState.bee.beeMoveDown == true) {
+        if (gameState.bee.beeMoveDown == true) {
             gameState.bee.y += gameState.bee.velocity;
         }
         // Move Bee Left
-        if (gameState.bee.x > 0 && gameState.bee.beeMoveLeft == true) {
+        if (gameState.bee.beeMoveLeft == true) {
             gameState.bee.x -= gameState.bee.velocity + 1;
         }
     }
 }
 
-/* WOULDN'T IT BE NICE (6 hours on this and nothing works, so I'll put it down)
-function snapBee(destinationX, destinationY, xOffset) {
-    gameState.bee.y = destinationY;
-    if (destinationX < 0) {
-        return;
-    } else if (gameState.bee.x > destinationX) {
-        gameState.bee.x -= xOffset;
-        gameState.bee.beeMoveUp = false;
-        gameState.bee.beeMoveDown = false;
-        gameState.bee.beeMoveLeft = false;
-        gameState.bee.beeMoveRight = false;
+function snapBee(destinationX, destinationY, xOffset, yDiff) {
+    if (gameState.bee.y < destinationY - 1 && gameState.bee.y > destinationY + 1) {
+        // gradually move the bee to
+        gameState.bee.y += yDiff/4
+
     }
+    gameState.bee.x -= xOffset*0.8;
+    gameState.bee.beeMoveUp = false;
+    gameState.bee.beeMoveDown = false;
+    gameState.bee.beeMoveLeft = false;
+    gameState.bee.beeMoveRight = false;
 }
-*/
+
 /*
 function launchBee(x, y) {
 
