@@ -28,13 +28,18 @@ function checkForFlowerCollision() {
                 gameState.score += 1;
 
                 //Lock the bee to flower's x/y?
+                let diffX = Math.round(gameState.flowers[i].flowerX - gameState.bee.x);
+                let diffY = Math.round(gameState.flowers[i].flowerY - gameState.bee.y);
+
                 
                 let beePause = setInterval(function(){
-                    pauseBee(gameState.flowers[i].flowerX, gameState.flowers[i].flowerY);
+                    console.log(`In beePause, flower is flower${i} diffX is ${diffX} and diffY is ${diffY}.`)
+
+                    snapBee(gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, diffX, diffY, gameState.flowers[i].randomOffset);
                 }, FPS);
                 setTimeout(function () {
                     clearInterval(beePause);
-                }, 100);
+                }, 400);
             }
         }
     }
