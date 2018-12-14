@@ -21,7 +21,7 @@ function checkForFlowerCollision() {
 
             if (cX >= bXLeft && cX <= bXRight 
             && cY >= bYTop && cY <= bYBottom) {
-                if (gameState.flowers[i].pollinated === true || gameState.bee.hasStinger === false) {
+                if (gameState.flowers[i].pollinated === true || gameState.bee.hasStinger === false || gameState.mode === "Game Over") {
                     break;
                 }
                 gameState.flowers[i].pollinated = true;
