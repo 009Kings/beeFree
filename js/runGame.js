@@ -33,15 +33,20 @@ function init() {
             beeMoveLeft: false,
             beeMoveRight: false,
             hasStinger: true, // stinger false means bee is dead
+            typeOfDeath: "none",
         },
         flowers: [],
         flowerNum: 0,
+        flowerFreqMin: 1500,
+        flowerFreqMax: 500,
         enemies: {
             wasps: {
                 inGame: true,
                 width: 70,
                 height: 55,
                 wingHeight: 10,
+                freqMin: 7000,
+                freqMax: 3000,
                 maxWasps: 10,
                 waspsNum: [],
             },

@@ -65,6 +65,7 @@ function checkWaspCollision() {
         if (collision == true){
             if (gameState.bee.hasStinger) {
                 gameState.bee.hasStinger = false;
+                gameState.bee.typeOfDeath = "wasp";
 
                 // Run game over setting
                 gameOver();

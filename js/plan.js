@@ -134,7 +134,7 @@ function generateFlower () {
         addFlower();
     }
     // 500 is my minimum. 2000 is my max space between flowers.
-    setTimeout(generateFlower, 500 + (Math.random() * 1500));
+    setTimeout(generateFlower, gameState.flowerFreqMax + (Math.random() * gameState.flowerFreqMin));
 }
 
 function addFlower () {
@@ -165,7 +165,7 @@ function renderFlower() {
         }
     
         /* ------ Debugging purposes -----
-        ctx.fillStyle = "chartreuse";
+        ctx.fillStyle = "limegreen";
         ctx.beginPath();
         ctx.rect(gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, FLOWER_WIDTH, FLOWER_HEIGHT);
         ctx.fill()*/
@@ -179,7 +179,7 @@ function generateWasps() {
     if (gameState.enemies.wasps.inGame && document.hasFocus()) {
         addWasp(); 
     }
-    setTimeout(generateWasps, 3000 + (Math.random() * 7000));
+    setTimeout(generateWasps, gameState.enemies.wasps.freqMax + (Math.random() * gameState.enemies.wasps.freqMin));
 }
 
 function addWasp() {
@@ -215,10 +215,10 @@ function renderBee() {
     // Draw the bee
     if (gameState.bee.hasStinger){
         ctx.drawImage(images.bee, gameState.bee.x, gameState.bee.y, 60, 50);
-    } else {
+    } else if (gameState.bee.typeOfDeath == "wasp") {
         ctx.drawImage(images.bee, gameState.bee.x, gameState.bee.y, 60, 50);
         // Zoom bee down
-        gameState.gravity = 10;
+        gameState.gravity = 6;
     }
     
 
