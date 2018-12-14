@@ -335,4 +335,10 @@ function moveBee() {
         }
     }
 }
+ 
+
+function pauseBee(x, y) {
+    gameState.bee.x = x;
+    gameState.bee.y = y;
+}
 

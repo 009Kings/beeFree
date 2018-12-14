@@ -22,6 +22,7 @@ function init() {
         mode: "Regular Mode",
         gameRunning: true,
         bee: {
+            //beePause: false,
             x: 50,
             y: 150,
             height: 50,

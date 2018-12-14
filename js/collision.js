@@ -26,6 +26,15 @@ function checkForFlowerCollision() {
                 }
                 gameState.flowers[i].pollinated = true;
                 gameState.score += 1;
+
+                //Lock the bee to flower's x/y?
+                
+                let beePause = setInterval(function(){
+                    pauseBee(gameState.flowers[i].flowerX, gameState.flowers[i].flowerY);
+                }, FPS);
+                setTimeout(function () {
+                    clearInterval(beePause);
+                }, 100);
             }
         }
     }
