@@ -13,6 +13,15 @@ function loadImage(location, keyName) {
     };
 }
 
+function checkMode() {
+    if (document.getElementById("zen-mode").checked) {
+        gameState.mode = "zen";
+        for (const key in gameState.enemies) {
+            gameState.enemies[key].inGame = false;
+        }
+    }
+}
+
 function generateXField() {
     return (Math.floor(Math.random() * (CANVAS_HEIGHT - 80)) + 10);
 }
@@ -60,7 +69,7 @@ function createScore() {
     return li;
 }
 
-/* ---------------- Start/Reset Button ---------------- */
+/* ---------------- Button Listeners ---------------- */
 
 function addStartListeners() {
     let startBtn = document.getElementById("start");
@@ -76,12 +85,7 @@ function addStartListeners() {
             // Initialise the board
             init();
             // Check if Zen mode is pressed
-            if (document.getElementById("zen-mode").checked) {
-                gameState.mode = "zen";
-                for (const key in gameState.enemies) {
-                    gameState.enemies[key].inGame = false;
-                }
-            }
+            checkMode();
 
             startIfReady();
         } else {
@@ -89,10 +93,18 @@ function addStartListeners() {
             storeScore();
 
             // Initialise the board
+            checkMode();
             document.getElementById("GO-modal").classList.add("hidden");
             init();
             addListeners();
         }
+    })
+    let changeMode = document.getElementById("change-mode");
+    changeMode.addEventListener("click", function () {
+        // Hide the GO Modal
+        document.getElementById("GO-modal").classList.add("hidden");
+        // Bring up the StartModal
+        document.getElementById("start-modal").classList.remove("hidden");
     })
 }
 

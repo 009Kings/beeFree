@@ -140,4 +140,5 @@ function gameOver() {
     let GOModal = document.getElementById("GO-modal");
     GOModal.classList.remove("hidden");
     document.getElementById("start").classList.remove("hidden");
+    
 }

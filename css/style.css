@@ -71,6 +71,7 @@ main {
     left: 150px;
     background-color: rgba(124, 49, 61, 0.7);
     border: 4px solid #660c2b;
+    font-family: "Raleway", sans-serif;
 }
 
 .modal-content {
@@ -82,14 +83,11 @@ main {
 }
 
 canvas {
-    border: 5px solid rgb(124, 49, 61);
+    border: 5px solid #660c2b;
     margin: 0 auto;
 }
 
-#start {
-    height: 50px;
-    width: 350px;
-    font-size: 1.2em;
+button {
     font-weight: bolder;
     background: #7C313D;
     border-color: #7C313D;
@@ -97,6 +95,21 @@ canvas {
     margin: 0 auto;
     position: relative;
     font-family: "Julius Sans One", sans-serif;
+}
+
+#start {
+    height: 50px;
+    width: 350px;
+    font-size: 1.2em;
+    border: 5px solid #660c2b;
+    border-top: none;
+}
+
+#change-mode {
+    padding: 10px;
+    border: 2px solid #660c2b;
+    font-size: 1em;
+    margin-top: 10%;
 }
 
 .score-card {
