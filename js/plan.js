@@ -13,21 +13,48 @@ function loadImage(location, keyName) {
     };
 }
 
-function checkMode() {
-    if (document.getElementById("zen-mode").checked) {
-        gameState.mode = "zen";
-        for (const key in gameState.enemies) {
-            gameState.enemies[key].inGame = false;
-        }
-    }
-}
-
 function generateXField() {
     return (Math.floor(Math.random() * (CANVAS_HEIGHT - 80)) + 10);
 }
 
 function randomRange (maxMinusMin, minMinusOne) {
     return Math.ceil(Math.random() * maxMinusMin) + minMinusOne;
+}
+
+function createScore() {
+    var li = document.createElement("li");
+    li.setAttribute("class", "score-item");
+    li.textContent = `In ${gameState.mode} you got a high-score of `;
+    // Make dat score
+    var span = document.createElement("span");
+    span.setAttribute("class", "score-value");
+    span.textContent = `${gameState.score}`;
+    li.appendChild(span);
+    return li;
+}
+
+/* ---------------- Game Initialisation ---------------- */
+
+function checkMode() {
+    // Initiate Zen Mode
+    if (document.getElementById("zen-mode").checked) {
+        gameState.mode = "Zen Mode";
+        for (const key in gameState.enemies) {
+            gameState.enemies[key].inGame = false;
+        }
+
+        // Make more flowers for Zen Mode
+        gameState.flowerFreqMax = 200;
+        gameState.flowerFreqMin = 1000;
+
+        // Bigger flowers
+        gameState.flowerWidth = gameState.flowerWidth * 1.25;
+        gameState.flowerHeight = gameState.flowerHeight * 1.25;
+
+        // Show the Restart Btn so you can end the damn game (NOTE, Need to change restart btn to show Game over modal if zen mode is active)
+        document.getElementById("start").classList.remove("hidden");
+        // document.getElementById("start").addEventListener("click", ...)
+    }
 }
 
 function storeScore() {
@@ -57,23 +84,12 @@ function storeScore() {
     }
 }
 
-function createScore() {
-    var li = document.createElement("li");
-    li.setAttribute("class", "score-item");
-    li.textContent = `You got a high-score of `;
-    // Make dat score
-    var span = document.createElement("span");
-    span.setAttribute("class", "score-value");
-    span.textContent = `${gameState.score}`;
-    li.appendChild(span);
-    return li;
-}
-
 /* ---------------- Button Listeners ---------------- */
 
 function addStartListeners() {
     let startBtn = document.getElementById("start");
     startBtn.addEventListener("click", function () {
+
         // Set Start modal status to hidden
         document.getElementById("start-modal").classList.add("hidden");
         document.getElementById("start").classList.add("hidden");
@@ -88,14 +104,14 @@ function addStartListeners() {
             checkMode();
 
             startIfReady();
+        } else if (gameState.mode === "Zen Mode") {
+            gameOver();
         } else {
-            // Store the Score
-            storeScore();
-
+        
             // Initialise the board
-            checkMode();
             document.getElementById("GO-modal").classList.add("hidden");
             init();
+            checkMode();
             addListeners();
         }
     })
@@ -159,7 +175,7 @@ function addFlower () {
     gameState.flowers[gameState.flowerNum].pollinated = false;
 
     // Make sure the flowers array is no more than the number of max flowers
-    if (gameState.flowerNum > maxFlowers) {
+    if (gameState.flowerNum > gameState.maxFlowers) {
         gameState.flowerNum = - 1;
     }
     gameState.flowerNum ++;
@@ -168,18 +184,18 @@ function addFlower () {
 function renderFlower() {
     // Render each flower in our Flowers array
     for (let i = 0; i < gameState.flowers.length; i++) {
-        gameState.flowers[i].flowerX = CANVAS_WIDTH + FLOWER_WIDTH - gameState.flowers[i].flowerOffset;
+        gameState.flowers[i].flowerX = CANVAS_WIDTH + gameState.flowerWidth - gameState.flowers[i].flowerOffset;
 
         if (gameState.flowers[i].pollinated === true) {
-            ctx.drawImage(images.flower1pollinated, gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
+            ctx.drawImage(images.flower1pollinated, gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, gameState.flowerWidth, gameState.flowerHeight);
         } else {
-            ctx.drawImage(images.flower1, gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, FLOWER_WIDTH, CANVAS_HEIGHT);
+            ctx.drawImage(images.flower1, gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, gameState.flowerWidth, gameState.flowerHeight);
         }
     
         /* ------ Debugging purposes -----
         ctx.fillStyle = "limegreen";
         ctx.beginPath();
-        ctx.rect(gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, FLOWER_WIDTH, FLOWER_HEIGHT);
+        ctx.rect(gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, gameState.flowerWidth, FLOWER_HEIGHT);
         ctx.fill()*/
     }
 }
@@ -234,7 +250,7 @@ function renderBee() {
     }
     
 
-    /* ------ BEEbugging Purposes ------ */
+    /* ------ BEEbugging Purposes ------ 
     //Bee Box
     let bXLeft = gameState.bee.x;
     let bXRight = gameState.bee.x + gameState.bee.width;
@@ -245,8 +261,7 @@ function renderBee() {
     ctx.beginPath();
     ctx.rect(bXLeft, bYTop, gameState.bee.width, bYBottom-bYTop);
     ctx.fill()
-
-    
+    */
 }
 
 /* ----- Bee Movement ----- */
@@ -301,7 +316,7 @@ function moveBee() {
     if (gameState.bee.y <= CANVAS_HEIGHT - gameState.bee.height) {
         gameState.bee.y += gameState.gravity;
     }
-    if (gameState.bee.hasStinger) {
+    if (gameState.bee.hasStinger && gameState.mode != "Game Over") {
         // Move Bee Up
         if (gameState.bee.y > 0 && gameState.bee.beeMoveUp == true) {
             gameState.bee.y -= gameState.bee.velocity;

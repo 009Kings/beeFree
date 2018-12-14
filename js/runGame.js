@@ -19,7 +19,7 @@ function init() {
     return gameState = {
         gravity: 1,
         score: 0,
-        mode: "regular",
+        mode: "Regular Mode",
         gameRunning: true,
         bee: {
             x: 50,
@@ -36,7 +36,10 @@ function init() {
             typeOfDeath: "none",
         },
         flowers: [],
+        flowerWidth: 50,
+        flowerHeight: CANVAS_HEIGHT,
         flowerNum: 0,
+        maxFlowers: 30,
         flowerFreqMin: 1500,
         flowerFreqMax: 500,
         enemies: {
@@ -135,10 +138,12 @@ function render() {
 }
 
 function gameOver() {
-    console.log("Bee dead!");
     //Get Game-Over Modal and reinstate the button!
     let GOModal = document.getElementById("GO-modal");
     GOModal.classList.remove("hidden");
     document.getElementById("start").classList.remove("hidden");
-    
+    // Store the Score
+    storeScore();
+    // Game Change
+    gameState.mode = "Game Over";
 }

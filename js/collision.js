@@ -5,9 +5,9 @@ function checkForFlowerCollision() {
         // Lets establish corners
         let corners = [
             {corner: "topLeft", x : gameState.flowers[i].flowerX, y : gameState.flowers[i].flowerY},
-            {corner: "topRight", x : gameState.flowers[i].flowerX + FLOWER_WIDTH, y : gameState.flowers[i].flowerY},
+            {corner: "topRight", x : gameState.flowers[i].flowerX + gameState.flowerWidth, y : gameState.flowers[i].flowerY},
             {corner: "bottomLeft", x : gameState.flowers[i].flowerX, y : gameState.flowers[i].flowerY + FLOWER_HEIGHT},
-            {corner: "bottomRight", x : gameState.flowers[i].flowerX + FLOWER_WIDTH, y : gameState.flowers[i].flowerY + FLOWER_HEIGHT}];
+            {corner: "bottomRight", x : gameState.flowers[i].flowerX + gameState.flowerWidth, y : gameState.flowers[i].flowerY + FLOWER_HEIGHT}];
 
         // Check if any of the corner points is within the bounds of the bee box; 
         for (let j = 0; j < corners.length; j++) {
