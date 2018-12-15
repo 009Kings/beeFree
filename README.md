@@ -23,7 +23,6 @@ The first day was mostly planning. The only code that came out was my HTML code 
 The bulk of my game logic was established on this day. The first thing I did was create a foreground that would move at a different speed to establish parallax.
 
 Then I put my bee on the board and worked on motion. I initially put the bee motion in the event listeners for the keyboard, but that resulted in very jumpy bee movement, but the functionality was there so I put it down for a later time. 
-
 ```
 /* ---------------- Bee ---------------- */
  function addListeners() {
@@ -53,9 +52,7 @@ Then I put my bee on the board and worked on motion. I initially put the bee mot
     }
 }
 ```
-
 I fixed this by creating a couple of global variables that would be booleans, giving the bee a velocity, creating an event listener for keyup, and making a moveBee function.
-
 ```
 function moveBee() {
     // Move Bee Up
@@ -78,7 +75,6 @@ function moveBee() {
 ```
 
 The next thing was to get my flowers on the board, so I worked on how to randomly generate them and move them without eventually slowing down the game with thousands of off-screen flowers.
-
 ```
 function generateFlower () {
     addFlower();
@@ -112,7 +108,6 @@ function renderFlower() {
 This got it working, even if it isn't the DRYest.
 
 After that, I worked on my collision detection, detecting if the corners of the flowers enter the bee square. 
-
 ```
 function checkForCollision() {
      // Check All the flowers on the board.
@@ -145,9 +140,7 @@ function checkForCollision() {
     }
 }
 ```
-
-Unfortunately, while the bee had no gravitational pull, it meant that she could just cruise through the flower box without having any corners of the flower enter her space (NOTE: I didn't figure this bug out until I drew my assets as boxes).Rather than refactoring my code and flipping it to detect both ways, I just added a gravity mechanic to the moveBee function (after adding to renderBee and having my bee drop into the earth). This fixed my threading the needle problem.
-
+Unfortunately, while the bee had no gravitational pull, it meant that he could just cruise through the flower box without having any corners of the flower enter his space (NOTE: I didn't figure this bug out until I drew my assets as boxes). Rather than refactoring my code and flipping it to detect both ways, I just added a gravity mechanic to the moveBee function (after adding to renderBee and having my bee drop into the earth). This fixed my threading the needle problem.
 ```
 if (bee.y <= CANVAS_HEIGHT - bee.height) {
         bee.y += GRAVITY;
@@ -165,12 +158,11 @@ I spent a lot of time doing CSS work on this day. I made a modal over the screen
 ## Wednesday (Day 5)
 
 I needed to have a start state which would initialise everytime the game restarted, so I made an empty object and a function to fill it. This seemed like a great idea until I broke the game.
-
 ![What a fun screen that isn't!](https://raw.githubusercontent.com/009kings/beeFree/master/readmeImg/noGame.png)
 
 The fix is to start out the gameState.gameRunning to be false (because it's not running), that way when init() is called it initialises it to true, thus starting the game.
 
-Always avoiding the death of my beloved bee, I decided to work on literally anything else, so I moved on to scoring. I wanted to make sure that I only had the top five scores and had them in order. I created a function to make my <li> components that also included a span of the score itself for easy comparison purposes.
+Always avoiding the death of my beloved bee, I decided to work on <strong>literally anything else</strong>, so I moved on to scoring. I wanted to make sure that I only had the top five scores and had them in order. I created a function to make my li components that also included a span of the score itself for easy comparison purposes.
 ```
 function createScore() {
     var li = document.createElement("li");
@@ -184,12 +176,9 @@ function createScore() {
     return li;
 }
 ```
+Then, in order to place it appropriately, I wrote a function that runs through if statements on if statements! <em>For reference: scoresDOM accesses my ol element in my HTML file and newScore calls my createScore helper function.</em>
 
-Then, in order to place it appropriately, I wrote a function that runs through if statements on if statements!
-
-For reference: scoresDOM accesses my ol element in my HTML file and newScore calls my createScore helper function.
-
-On the first if of functionmas, my true love asked of me, "are there any children in your scoresDom?"
+🎶 On the fifth day of project week, my true love asked of me, "are there any children in your scoresDom?"🎶 
 ```
     if (scoresDOM.childElementCount === 0) {
         scoresDOM.appendChild(newScore);
@@ -211,19 +200,33 @@ You might think that's the last of it, but if you keep getting higher scores, th
                     scoresDOM.removeChild(scoresDOM.lastChild);
                 }
 ```
-So you got a new score, it's not higher than any of the current children of my <ol>, what to do now? Well, if there are less than five scores on the board, then you get a spot! But if there are already five on the board and your score hasn't been put on the board yet, than tough cookies, nothing happens.
+So you got a new score, it's not higher than any of the current children of my ol, what to do now? Well, if there are less than five scores on the board, then you get a spot! But if there are already five on the board and your score hasn't been put on the board yet, than tough cookies, nothing happens.
 
-And all that logic and bug fixing took about 200% longer than anticipated. After the organised list runaround, it was about halfway through the day, and I was introduced to emojis in my git-commits, thus driving me to make my commits as chessy as my game. You can see the time-window of this discovery in my commits.
+All that logic and bug fixing took about 200% longer than anticipated. After the organised list runaround, it was about halfway through the day, and I was introduced to emojis in my git-commits, thus driving me to make my commits as cheesy as my game. You can see the time-window of this discovery in my commits.
 
-After much feet dragging and doing anything else, I finally added a lose condition; the bee's impermanence finally came to fruition in the shape of chartreuse coloured box-wasps. Through implimenting the wasp collision detection, I found a couple of fixes to be made in my refactered collision code, but came out with more widely applicable code.
+After much feet dragging and doing everything else, I finally added a lose condition; the bee's impermanence finally came to fruition in the shape of chartreuse coloured box-wasps. Through implimenting the wasp collision detection, I found a couple of fixes that had to be made to my refactered collision code, but I came out with more widely applicable code.
 
 After making sure the bee could die, I implimented a radio button in the start modal so that you could start the game in Zen mode should you feel so inclined.
-
 ![Zen Mode or Regular mode? The choice is yours with a simple click of a radio button](https://raw.githubusercontent.com/009kings/beeFree/master/readmeImg/radioZen.png)
 
 ## Thursday (Day 6)
 
+I got a late start to the day so I went in and refactored some code and fixed a couple of little things (like having the wasp collision not register wingspace). I also figured out how to prevent my cool BAM FLOWERS AND WASPS bug where if you leave the screen while game is running, when you come back, it'll reward you with all of the flowers and wasps in one clump on the screen.
+![BAM! Flowers and wasps!](https://raw.githubusercontent.com/009kings/beeFree/master/readmeImg/BAMFlowersAndWasps.png)
+Thanks to Javascript's hasFocus function method, I was able to fix this by adding a couple of if statements to my generateWasps function and to my generateFlowers function
+```
+if (gameState.enemies.wasps.inGame && document.hasFocus()) {
+    addWasp(); 
+}
+...
+if (document.hasFocus()) {
+    addFlower();
+}
+```
 
+I then polished up my GameOver modal so that losing is at least aesthetically less painful. With that, I added a button to change modes if the presence of bee-killing wasps became too stressful for the player. I also edited my createScore function to represent which gamemode the score came from so players couldn't pass their Zen scores off as regular scores. I also kept the restart button at the bottom of the canvas for those who want to end Zen mode at some point and time (I don't know why you would though).
+
+At the end of the day, I decided that the next entrie pie I wanted to bite was animating a bee pause on all of the pollinated flowers. I got a pretty sweet setInterval and setTimeout(clearInterval) going right before bed, not understanding that what I had bitten off was not a tasty amuse-bouche, but rather a fresh whale. 
 
 ## Friday (Day 7)
 
