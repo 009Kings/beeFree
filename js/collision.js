@@ -36,7 +36,7 @@ function checkForFlowerCollision() {
 
                 let beePause = setInterval(function(){
 
-                    snapBee(destinationX, gameState.flowers[i].flowerY, gameState.flowers[i].randomOffset, gameState.bee.y - gameState.flowers[i].flowerY);
+                    snapBee(gameState.flowers[i].flowerY, gameState.flowers[i].randomOffset, gameState.bee.y - gameState.flowers[i].flowerY);
                 }, FPS);
                 setTimeout(function () {
                     clearInterval(beePause);

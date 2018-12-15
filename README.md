@@ -225,6 +225,52 @@ After making sure the bee could die, I implimented a radio button in the start m
 
 
 
+## Friday (Day 7)
+
+🎶 On the seventh day of project week, my true love gave to me, SEVEN HUNDRED BUGS! 🎶
+
+While that number is certainly an exaggeration, it didn't feel like it. I ended the day on Thursday hopeful of what I could achieve, I had snapped my bee to the pollinated flower's x and y coordinates, how hard could it be to make that transition smooth?
+
+<strong>Very.</strong>
+
+I am changing my name to Icarus because after six or seven different logic structures and six hours of work I finally realised that the wax on my wings had melted and I was plumetting back to earth with the velocity of my hubris. 
+
+![Bee's got the zoomies part One](https://raw.githubusercontent.com/009kings/beeFree/master/readmeImg/beeLaunchBug.gif)
+
+![Bee's got the zoomies part One](https://raw.githubusercontent.com/009kings/beeFree/master/readmeImg/beeLaunchBug2.gif)
+
+![Bee's got the zoomies part One](https://raw.githubusercontent.com/009kings/beeFree/master/readmeImg/beeLaunchBug3.gif)
+
+I tried to figure out the code found at http://mattshaw.org/projects/simple-javascript-tweening/ (which is a very handy resouce), but had no luck. 
+
+In the end, I just "turned off" the movement listeners and had the bee's x move at the same rate as the flower's.
+ ```
+ function snapBee(destinationY, xOffset, yDiff) {
+    if (gameState.bee.y < destinationY - 1 && gameState.bee.y > destinationY + 1) {
+        // gradually move the bee to
+        gameState.bee.y += yDiff/4
+
+    }
+    gameState.bee.x -= xOffset*0.8;
+    gameState.bee.beeMoveUp = false;
+    gameState.bee.beeMoveDown = false;
+    gameState.bee.beeMoveLeft = false;
+    gameState.bee.beeMoveRight = false;
+}
+
+gameState.bee.beePause = true;
+
+let beePause = setInterval(function(){
+    snapBee(gameState.flowers[i].flowerY, gameState.flowers[i].randomOffset, gameState.bee.y - gameState.flowers[i].flowerY);
+}, FPS);
+
+setTimeout(function () {
+    clearInterval(beePause);
+    gameState.bee.beePause = false;
+}, gameState.pauseMS);
+ ```
+ And thus we have a little hover that runs at the same rate as the render and lasts for as long as gameState.pauseMS states (pauseMS means pause in Millisecods).
+
 ## Technology Used:
 
 * HTML5

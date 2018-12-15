@@ -51,16 +51,15 @@ function checkMode() {
         gameState.flowerWidth = gameState.flowerWidth * 1.25;
         gameState.flowerHeight = gameState.flowerHeight * 1.25;
 
-        // Show the Restart Btn so you can end the damn game (NOTE, Need to change restart btn to show Game over modal if zen mode is active)
+        // Show the Restart Btn so you can end the damn game
         document.getElementById("start").classList.remove("hidden");
-        // document.getElementById("start").addEventListener("click", ...)
     }
 }
 
 function storeScore() {
     let scoresDOM = document.querySelector("#high-scores");
     let newScore = createScore();
-    //Insert the li PREFERABLY IN ORDER
+    //Insert the li in order
     if (scoresDOM.childElementCount === 0) {
         scoresDOM.appendChild(newScore);
         return;
@@ -348,7 +347,7 @@ function moveBee() {
     }
 }
 
-function snapBee(destinationX, destinationY, xOffset, yDiff) {
+function snapBee(destinationY, xOffset, yDiff) {
     if (gameState.bee.y < destinationY - 1 && gameState.bee.y > destinationY + 1) {
         // gradually move the bee to
         gameState.bee.y += yDiff/4
