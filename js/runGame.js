@@ -36,7 +36,7 @@ function init() {
             hasStinger: true, // stinger false means bee is dead
             typeOfDeath: "none",
         },
-        pauseMS: 400,
+        pauseMS: 300,
         flowers: [],
         flowerWidth: 50,
         flowerHeight: CANVAS_HEIGHT,

@@ -45,7 +45,7 @@ function checkMode() {
 
         // Make more flowers for Zen Mode
         gameState.flowerFreqMax = 200;
-        gameState.flowerFreqMin = 1000;
+        gameState.flowerFreqMin = 1300;
 
         // Bigger flowers
         gameState.flowerWidth = gameState.flowerWidth * 1.25;
@@ -270,7 +270,7 @@ function addListeners() {
     // add event listeners for keyboard
     document.addEventListener("keydown", keyDownHandler, false);
     
-    //gradually stop
+    // Stop trajectory when key is up
     document.addEventListener("keyup", keyUpHandler, false);
 
     // add event listeners for touch : MOBILE FUTURE DEVELOPMENT
