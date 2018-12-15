@@ -213,7 +213,7 @@ After making sure the bee could die, I implimented a radio button in the start m
 
 I got a late start to the day so I went in and refactored some code and fixed a couple of little things (like having the wasp collision not register wingspace). I also figured out how to prevent my cool BAM FLOWERS AND WASPS bug where if you leave the screen while game is running, when you come back, it'll reward you with all of the flowers and wasps in one clump on the screen.
 ![BAM! Flowers and wasps!](https://raw.githubusercontent.com/009kings/beeFree/master/readmeImg/BAMFlowersAndWasps.png)
-Thanks to Javascript's hasFocus function method, I was able to fix this by adding a couple of if statements to my generateWasps function and to my generateFlowers function
+Thanks to Javascript's hasFocus method, I was able to fix this by adding a couple of if statements to my generateWasps function and to my generateFlowers function
 ```
 if (gameState.enemies.wasps.inGame && document.hasFocus()) {
     addWasp(); 
@@ -224,9 +224,9 @@ if (document.hasFocus()) {
 }
 ```
 
-I then polished up my GameOver modal so that losing is at least aesthetically less painful. With that, I added a button to change modes if the presence of bee-killing wasps became too stressful for the player. I also edited my createScore function to represent which gamemode the score came from so players couldn't pass their Zen scores off as regular scores. I also kept the restart button at the bottom of the canvas for those who want to end Zen mode at some point and time (I don't know why you would though).
+I then polished up my GameOver modal so that losing is less painful  at least aesthetically. With that, I added a button to change modes if the presence of bee-killing wasps became too stressful for the player. I also edited my createScore function to represent which gamemode the score came from so players couldn't pass their Zen scores off as regular scores. I also kept the restart button at the bottom of the canvas for those who want to end Zen mode at some point and time (I don't know why you would though).
 
-At the end of the day, I decided that the next entrie pie I wanted to bite was animating a bee pause on all of the pollinated flowers. I got a pretty sweet setInterval and setTimeout(clearInterval) going right before bed, not understanding that what I had bitten off was not a tasty amuse-bouche, but rather a fresh whale. 
+At the end of the day, I decided that the next step I wanted to bite off was making the bee pause on all of the pollinated flowers. I got a pretty sweet setInterval and setTimeout(clearInterval) going right before bed, not understanding that what I had bitten off was not a tasty amuse-bouche, but rather a fresh whale. 
 
 ## Friday (Day 7)
 
@@ -244,7 +244,7 @@ I am changing my name to Icarus because after six or seven different logic struc
 
 ![Bee's got the zoomies part One](https://raw.githubusercontent.com/009kings/beeFree/master/readmeImg/beeLaunchBug3.gif)
 
-I tried to figure out the code found at http://mattshaw.org/projects/simple-javascript-tweening/ (which is a very handy resouce), but had no luck. 
+Everything I wrote out logically made sense, but after a while I realised I wanted to do tweening, but most of the resources for tweening are frameworks which, for some masochistic reason, I am commited to not using in this project. I tried to figure out the code found at http://mattshaw.org/projects/simple-javascript-tweening/ (which is a very handy resouce), but had no luck. 
 
 In the end, I just "turned off" the movement listeners and had the bee's x move at the same rate as the flower's.
  ```
