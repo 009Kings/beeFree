@@ -1,11 +1,11 @@
 // Constants
 const BG_WIDTH = 2800;
-const CANVAS_WIDTH = 700;
-const CANVAS_HEIGHT = 350;
 const FLOWER_HEIGHT = 50;
 const FPS = 16;
 
 // Loadings Variables
+let canvasWidth = 700;
+let canvasHeight = canvasWidth/2;
 var ctx = document.getElementById("game").getContext('2d');
 let images = {};
 let imagesReady = false;

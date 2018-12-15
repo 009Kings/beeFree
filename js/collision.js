@@ -16,7 +16,7 @@ function checkForFlowerCollision() {
             let cY = corners[j].y;
             let bXLeft = gameState.bee.x;
             let bXRight = gameState.bee.x + gameState.bee.width;
-            let bYTop = gameState.bee.y + 10;
+            let bYTop = gameState.bee.y + gameState.bee.wings;
             let bYBottom = gameState.bee.y + gameState.bee.height; 
 
             if (cX >= bXLeft && cX <= bXRight 

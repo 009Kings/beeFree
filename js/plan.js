@@ -14,7 +14,7 @@ function loadImage(location, keyName) {
 }
 
 function generateXField() {
-    return (Math.floor(Math.random() * (CANVAS_HEIGHT - 80)) + 10);
+    return (Math.floor(Math.random() * (canvasHeight - 80)) + 10);
 }
 
 function randomRange (maxMinusMin, minMinusOne) {
@@ -101,7 +101,7 @@ function addStartListeners() {
             init();
             // Check if Zen mode is pressed
             checkMode();
-
+            console.log(gameState.bee.x, gameState.bee.y);
             startIfReady();
         } else if (gameState.mode === "Zen Mode") {
             gameOver();
@@ -132,8 +132,8 @@ function renderBackground() {
     var x2 = BG_WIDTH - stepper;
 
     // Draw dem backgrounds
-    ctx.drawImage(images.background, x1, 0, BG_WIDTH, CANVAS_HEIGHT);
-    ctx.drawImage(images.background, x2, 0, BG_WIDTH, CANVAS_HEIGHT);
+    ctx.drawImage(images.background, x1, 0, BG_WIDTH, canvasHeight);
+    ctx.drawImage(images.background, x2, 0, BG_WIDTH, canvasHeight);
 }
 
 /* ---------------- Foreground ---------------- */
@@ -144,15 +144,15 @@ function renderForeground() {
     var x2 = BG_WIDTH - stepper;
 
     // Draw dem foregrounds
-    ctx.drawImage(images.foreground, x1, 0, BG_WIDTH, CANVAS_HEIGHT);
-    ctx.drawImage(images.foreground, x2, 0, BG_WIDTH, CANVAS_HEIGHT);
+    ctx.drawImage(images.foreground, x1, 0, BG_WIDTH, canvasHeight);
+    ctx.drawImage(images.foreground, x2, 0, BG_WIDTH, canvasHeight);
 }
 
 /* ------------ Score ---------- */
 
 function renderScore() {
     ctx.font = "20px Cherry Swash";
-    ctx.fillText(`Score: ${gameState.score}`, CANVAS_WIDTH - 110, 20);
+    ctx.fillText(`Score: ${gameState.score}`, canvasWidth - 110, 20);
 }
 
 /* ---------------- Flowers ---------------- */
@@ -183,7 +183,7 @@ function addFlower () {
 function renderFlower() {
     // Render each flower in our Flowers array
     for (let i = 0; i < gameState.flowers.length; i++) {
-        gameState.flowers[i].flowerX = CANVAS_WIDTH + gameState.flowerWidth - gameState.flowers[i].flowerOffset;
+        gameState.flowers[i].flowerX = canvasWidth + gameState.flowerWidth - gameState.flowers[i].flowerOffset;
 
         if (gameState.flowers[i].pollinated === true) {
             ctx.drawImage(images.flower1pollinated, gameState.flowers[i].flowerX, gameState.flowers[i].flowerY, gameState.flowerWidth, gameState.flowerHeight);
@@ -226,7 +226,7 @@ function addWasp() {
 function renderWasp() {
     let waspArray = gameState.enemies.wasps.waspsNum;
     for (let i = 0; i < waspArray.length; i++) {
-        waspArray[i].x = CANVAS_WIDTH + gameState.enemies.wasps.width - waspArray[i].offsetBase;
+        waspArray[i].x = canvasWidth + gameState.enemies.wasps.width - waspArray[i].offsetBase;
 
         ctx.fillStyle = "chartreuse";
         ctx.beginPath();
@@ -317,14 +317,14 @@ function moveBee() {
     if (gameState.bee.y <= 0) {
         gameState.bee.y = 0;
     }
-    if (gameState.bee.x >= CANVAS_WIDTH - gameState.bee.width) {
-        gameState.bee.x = CANVAS_WIDTH - gameState.bee.width;
+    if (gameState.bee.x >= canvasWidth - gameState.bee.width) {
+        gameState.bee.x = canvasWidth - gameState.bee.width;
     }
-    if (gameState.bee.y >= CANVAS_HEIGHT - gameState.bee.height) {
-        gameState.bee.y = CANVAS_HEIGHT - gameState.bee.height;
+    if (gameState.bee.y >= canvasHeight - gameState.bee.height) {
+        gameState.bee.y = canvasHeight - gameState.bee.height;
     }
     // GraviBEE
-    if (gameState.bee.y <= CANVAS_HEIGHT - gameState.bee.height && gameState.bee.beePause != true) {
+    if (gameState.bee.y <= canvasHeight - gameState.bee.height && gameState.bee.beePause != true) {
         gameState.bee.y += gameState.gravity;
     }
     if (gameState.bee.hasStinger && gameState.mode != "Game Over") {
