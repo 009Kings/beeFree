@@ -35,8 +35,6 @@ function createScore() {
 
 /* ---------------- Game Initialisation ---------------- */
 
-// Check if we on mobile, if so, replace #start-content textContent with "Help Mr. Bee in his mission to pollinate as many flowers as he can! Use the two D-pads on either side of the screen to fly though the world and land on the flowers you pass."
-
 function checkMode() {
     // Initiate Zen Mode
     if (document.getElementById("zen-mode").checked) {
@@ -129,8 +127,17 @@ function addStartListeners() {
     // Enable touch button 
     let touchBtn = document.getElementById("mobile-mode");
     touchBtn.addEventListener("click", function(){
-        mobile = true;
-        document.getElementById("mobile-pads").classList.remove("hidden");
+        if (!mobile) {
+            mobile = true;
+            document.getElementById("mobile-pads").classList.remove("hidden");
+            touchBtn.textContent = "Disable touch mode";
+            document.getElementById("start-content").textContent = "Help Mr. Bee in his mission to pollinate as many flowers as he can! Use the two D-pads on either side of the screen to fly though the world and land on the flowers you pass.";
+        } else if (mobile) {
+            mobile = false;
+            document.getElementById("mobile-pads").classList.add("hidden");
+            touchBtn.textContent = "Enable touch mode"
+            document.getElementById("start-content").textContent = `Help Mr. Bee in his mission to pollinate as many flowers as he can! Use "W" to move up, "A" to move left, "S" to move down, and "D" to move right. Fly though the world and land on the flowers you pass.`;
+        }
     })
 }
 
