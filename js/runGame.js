@@ -5,8 +5,8 @@ function load() {
     loadImage("bee1.png", "bee");
     loadImage("flower1.png", "flower1");
     loadImage("flower1polinated.png", "flower1pollinated");
-    // loadImage("wasp.png", "wasp");
-    // loadImage("deadBee.png", "deadBee");
+    loadImage("wasp.png", "wasp");
+    loadImage("deadBee.png", "deadBee");
 }
 
 /* -------- Start the game! Featuring modial -------- */
@@ -47,8 +47,8 @@ function init() {
         enemies: {
             wasps: {
                 inGame: true,
-                width: 70,
-                height: 55,
+                width: 80,
+                height: 70,
                 wingHeight: 10,
                 freqMin: 7000,
                 freqMax: 3000,

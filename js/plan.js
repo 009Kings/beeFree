@@ -274,7 +274,7 @@ function addWasp() {
     let newWasp = {};
     newWasp.y = generateXField();
     newWasp.offsetBase = 0;
-    newWasp.randomOffset = randomRange(5, 2);
+    newWasp.randomOffset = randomRange(5, 3);
     newWasp.width = gameState.enemies.wasps.width;
     newWasp.height = gameState.enemies.wasps.height;
     if (waspsArray.length > gameState.enemies.wasps.masWasps) {
@@ -288,10 +288,15 @@ function renderWasp() {
     for (let i = 0; i < waspArray.length; i++) {
         waspArray[i].x = canvasWidth + gameState.enemies.wasps.width - waspArray[i].offsetBase;
 
+        ctx.drawImage(images.wasp, waspArray[i].x, waspArray[i].y, gameState.enemies.wasps.width, gameState.enemies.wasps.height);
+
+
+    /* In case I need to get a good gWASP of the situation
         ctx.fillStyle = "chartreuse";
         ctx.beginPath();
         ctx.rect(waspArray[i].x, waspArray[i].y, gameState.enemies.wasps.width, gameState.enemies.wasps.height);
         ctx.fill()
+        */
     }
 }
 
@@ -303,9 +308,9 @@ function renderBee() {
     if (gameState.bee.hasStinger){
         ctx.drawImage(images.bee, gameState.bee.x, gameState.bee.y, 60, 50);
     } else if (gameState.bee.typeOfDeath == "wasp") {
-        ctx.drawImage(images.bee, gameState.bee.x, gameState.bee.y, 60, 50);
+        ctx.drawImage(images.deadBee, gameState.bee.x, gameState.bee.y, 60, 50);
         // Zoom bee down
-        gameState.gravity = 6;
+        gameState.gravity = 3;
     }
     
 
@@ -409,7 +414,7 @@ function snapBee(destinationY, xOffset, yDiff) {
     gameState.bee.beeMoveRight = false;
 }
 
-/*
+/* FOR FUTURE DEVELOPMENT, things that would repel the bee.
 function launchBee(x, y) {
 
     let diffX = gameState.bee.x - x;

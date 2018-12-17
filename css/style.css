@@ -90,6 +90,7 @@ canvas {
 }
 
 button {
+    z-index: 1;
     font-weight: bolder;
     background: #7C313D;
     border-color: #7C313D;
@@ -126,15 +127,13 @@ button {
     top: 350px;
     width: 100%;
     grid-template-columns: 180px 1fr 180px;
-    grid-template-areas:
-        "left-pad . right-pad";
 }
 
 .d-pad {
     height: 180px;
     width: 180px;
     border-radius: 50%;
-    background-color: rgba(255, 99, 71, 0.445);
+    background-color:rgba(101, 138, 29, 0.36);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
