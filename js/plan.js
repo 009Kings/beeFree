@@ -33,6 +33,20 @@ function createScore() {
     return li;
 }
 
+function addTouch(direction, beeDirection) {
+    direction.forEach(function (btn) {
+        console.log(`${direction} pressed!`)
+        btn.addEventListener("pointerdown", function(){
+            gameState.bee[beeDirection] = true;
+        })
+    })
+    direction.forEach(function(btn){
+        btn.addEventListener("pointerup", function(){
+            gameState.bee[beeDirection] = false;
+        })
+    })
+}
+
 /* ---------------- Game Initialisation ---------------- */
 
 function checkMode() {
@@ -139,6 +153,25 @@ function addStartListeners() {
             document.getElementById("start-content").textContent = `Help Mr. Bee in his mission to pollinate as many flowers as he can! Use "W" to move up, "A" to move left, "S" to move down, and "D" to move right. Fly though the world and land on the flowers you pass.`;
         }
     })
+}
+
+function addListeners() {
+    // add event listeners for keyboard
+    document.addEventListener("keydown", keyDownHandler, false);
+    
+    // Stop trajectory when key is up
+    document.addEventListener("keyup", keyUpHandler, false);
+
+    // add event listeners for touch : MOBILE FUTURE DEVELOPMENT
+    let up = document.querySelectorAll(".up");
+    let right = document.querySelectorAll(".right");
+    let down = document.querySelectorAll(".down");
+    let left = document.querySelectorAll(".left");
+
+    addTouch(up, beeMoveUp);
+    addTouch(right, beeMoveRight);
+    addTouch(down, beeMoveDown);
+    addTouch(left, beeMoveLeft);
 }
 
 /* ---------------- Background ---------------- */
@@ -282,17 +315,6 @@ function renderBee() {
 }
 
 /* ----- Bee Movement ----- */
-
-function addListeners() {
-    // add event listeners for keyboard
-    document.addEventListener("keydown", keyDownHandler, false);
-    
-    // Stop trajectory when key is up
-    document.addEventListener("keyup", keyUpHandler, false);
-
-    // add event listeners for touch : MOBILE FUTURE DEVELOPMENT
-
-}
 
 function keyDownHandler(e) {
     // W
