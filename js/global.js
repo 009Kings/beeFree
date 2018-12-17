@@ -15,6 +15,7 @@ let readiness = {};
 let gameState = {
     gameRunning: false,
 };
+let mobile = false;
 
 // Coordinate Variables
 let bgXOffset = 0;

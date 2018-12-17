@@ -12,6 +12,7 @@
     <head>
         <h1 id="title">Bee Free</h1>
         <h2 id="subtitles">Pollination Station</h2>
+        <button id="mobile-mode">Enable touch mode</button>
     </head>
     <main>
         <div class="game-and-modal">
@@ -38,13 +39,27 @@
             </div>
         </div>
         <button id="start"> Start the game!</button>
+        <div id="mobile-pads" class="sticky-sides hidden">
+            <div class="d-pad" id="left-pad">
+                <img src="./assets/arrow.png" alt="arrow" class="arrow up">
+                <img src="./assets/arrow.png" alt="arrow" class="arrow right">
+                <img src="./assets/arrow.png" alt="arrow" class="arrow down">
+                <img src="./assets/arrow.png" alt="arrow" class="arrow left">
+            </div>
+            <div class="d-pad" id="right-pad">
+                    <img src="./assets/arrow.png" alt="arrow" class="arrow up">
+                    <img src="./assets/arrow.png" alt="arrow" class="arrow right">
+                    <img src="./assets/arrow.png" alt="arrow" class="arrow down">
+                    <img src="./assets/arrow.png" alt="arrow" class="arrow left">
+            </div>
+        </div>
         <div class="score-card">
             <ol id="high-scores"></ol>
         </div>
     </main>
   
-    <footer class="social-media">
-        <div><a href="https://github.com/009Kings" ><img src="./assets/GitHub.png" alt="github logo" class="icon"></a>
+    <footer class="sticky-sides">
+        <div class="social-media"><a href="https://github.com/009Kings" ><img src="./assets/GitHub.png" alt="github logo" class="icon"></a>
         <a href="https://www.linkedin.com/in/sarah-king-wang-shasha/"><img src="./assets/In-Black-81px-TM.png" alt="linkedin logo" class="icon"></a>
         <a href="mailto:009kings@gmail.com"><img src="./assets/Mail.png" alt="Mail icon" class="icon"></a></div>
 

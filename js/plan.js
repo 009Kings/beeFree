@@ -116,12 +116,21 @@ function addStartListeners() {
             addListeners();
         }
     })
+
+    // Change mode button
     let changeMode = document.getElementById("change-mode");
     changeMode.addEventListener("click", function () {
         // Hide the GO Modal
         document.getElementById("GO-modal").classList.add("hidden");
         // Bring up the StartModal
         document.getElementById("start-modal").classList.remove("hidden");
+    })
+
+    // Enable touch button 
+    let touchBtn = document.getElementById("mobile-mode");
+    touchBtn.addEventListener("click", function(){
+        mobile = true;
+        document.getElementById("mobile-pads").classList.remove("hidden");
     })
 }
 

@@ -1,3 +1,9 @@
+#mobile-mode {
+    padding: 5px 20px;
+    font-size: 1em;
+    border: 4.5px solid #660c2b;
+    border-bottom: none;
+}
 
 body {
     display: grid;
@@ -95,9 +101,9 @@ button {
 
 #start {
     height: 50px;
-    width: 350px;
+    width: 300px;
     font-size: 1.2em;
-    border: 5px solid #660c2b;
+    border: 4.5px solid #660c2b;
     border-top: none;
 }
 
@@ -106,6 +112,74 @@ button {
     border: 2px solid #660c2b;
     font-size: 1em;
     margin-top: 10%;
+}
+
+.sticky-sides { 
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+}
+
+#mobile-pads {
+    display: grid;
+    position: absolute;
+    top: 350px;
+    width: 100%;
+    grid-template-columns: 180px 1fr 180px;
+}
+
+.d-pad {
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    background-color: rgba(255, 99, 71, 0.445);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+        ". up ."
+        "left . right"
+        ". down .";
+}
+
+.arrow {
+    height: 60px;
+    width: 60px;
+}
+
+.up {
+    grid-area: up;
+}
+
+.right {
+    grid-area: right;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.down {
+    grid-area: down;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.left {
+    grid-area: left;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+#right-pad {
+    grid-column: 3;
 }
 
 .score-card {
@@ -119,10 +193,7 @@ button {
     margin: 3px;
 }
 
-footer { 
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: 1fr;
+footer {
     background: rgba(60, 102, 12, 0.384);
 }
 
@@ -147,4 +218,10 @@ img {
 
 .name {
     font-weight: 800;
+}
+
+@media only screen and (max-width: 710px) {
+    #mobile-pads {
+        width: 710px;
+    }
 }
