@@ -35,7 +35,6 @@ function createScore() {
 
 function addTouch(direction, beeDirection) {
     direction.forEach(function (btn) {
-        console.log(`${direction} pressed!`)
         btn.addEventListener("pointerdown", function(){
             gameState.bee[beeDirection] = true;
         })
@@ -168,10 +167,10 @@ function addListeners() {
     let down = document.querySelectorAll(".down");
     let left = document.querySelectorAll(".left");
 
-    addTouch(up, beeMoveUp);
-    addTouch(right, beeMoveRight);
-    addTouch(down, beeMoveDown);
-    addTouch(left, beeMoveLeft);
+    addTouch(up, "beeMoveUp");
+    addTouch(right, "beeMoveRight");
+    addTouch(down, "beeMoveDown");
+    addTouch(left, "beeMoveLeft");
 }
 
 /* ---------------- Background ---------------- */

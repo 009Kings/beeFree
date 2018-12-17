@@ -126,6 +126,8 @@ button {
     top: 350px;
     width: 100%;
     grid-template-columns: 180px 1fr 180px;
+    grid-template-areas:
+        "left-pad . right-pad";
 }
 
 .d-pad {
