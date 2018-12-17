@@ -307,10 +307,11 @@ function addTouch(direction, beeDirection) {
     })
 }
 ```
-After that, it was all about making the game look better. First up, I had to make a scary lookin' wasp that could instil the same feeling of panic and dismay that you feel when seeing a wasp zoom toward you in real life. 
-![The king of the Waspia](https://raw.githubusercontent.com/009kings/beeFree/master/assets/wasp.png)
-The red eyes were crucial to offset the cuteness of the bee. Following that, I added a feature that changes the bee image when it dies, to really hammer in how evil these wasps are.
-![Im-im-IMPERMANENCE](https://raw.githubusercontent.com/009kings/beeFree/master/assets/deadBee.png)
+After that, it was all about making the game look better. First up, I had to make a scary lookin' wasp that could instil the same feeling of panic and dismay that you feel when seeing a wasp zoom toward you in real life.\
+
+![The king of the Waspia](https://raw.githubusercontent.com/009kings/beeFree/master/assets/wasp.png)\
+The red eyes were crucial to offset the cuteness of the bee. Following that, I added a feature that changes the bee image when it dies, to really hammer in how evil these wasps are.\
+![Im-im-IMPERMANENCE](https://raw.githubusercontent.com/009kings/beeFree/master/assets/deadBee.png)\
 You don't get to see this art aspect much, it's more of a horrific artistic treat for when you get to see the be fall.
 
 And finally, to make me feel better about how horrific the natural world is, I drew some lovely, serene mountains and put on Bob Ross. I added another layer of Parallax and realised another area wherein I could refactor.
