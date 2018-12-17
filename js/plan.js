@@ -35,6 +35,8 @@ function createScore() {
 
 /* ---------------- Game Initialisation ---------------- */
 
+// Check if we on mobile, if so, replace #start-content textContent with "Help Mr. Bee in his mission to pollinate as many flowers as he can! Use the two D-pads on either side of the screen to fly though the world and land on the flowers you pass."
+
 function checkMode() {
     // Initiate Zen Mode
     if (document.getElementById("zen-mode").checked) {

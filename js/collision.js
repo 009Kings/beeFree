@@ -30,10 +30,6 @@ function checkForFlowerCollision() {
                 //Lock the bee to flower's x/y?
                 gameState.bee.beePause = true;
 
-                let numOfFrames = 1 + (gameState.pauseMS/FPS);
-                let flowerOffset = numOfFrames * gameState.flowers[i].randomOffset;
-                let destinationX = gameState.flowers[i].flowerX - flowerOffset;
-
                 let beePause = setInterval(function(){
 
                     snapBee(gameState.flowers[i].flowerY, gameState.flowers[i].randomOffset, gameState.bee.y - gameState.flowers[i].flowerY);

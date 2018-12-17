@@ -1,13 +1,9 @@
-html {
-    height: 100%;
-}
+
 body {
-    min-height: 100%;
-    max-height: 100%;
     display: grid;
     background-color: rgb(255, 250, 200);
     grid-template-rows: auto auto 1fr auto;
-    grid-template-columns: 100%;
+    grid-template-columns: 1fr;
     margin: 0;
     font-family: "Julius Sans One", sans-serif;
 }
@@ -114,7 +110,7 @@ button {
 
 .score-card {
     margin: 0 auto;
-    width: 350px;
+    width: 700px;
     text-align: center;
     list-style-position: inside;
 }
