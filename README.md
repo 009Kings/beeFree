@@ -313,6 +313,12 @@ You don't get to see this art aspect much, it's more of a horrific artistic trea
 
 And finally, to make me feel better about how horrific the natural world is, I drew some lovely, serene mountains and put on Bob Ross. I added another layer of Parallax and realised another area wherin I could refactor.
 
+## The Future of BeeFree
+
+I am going to continue to work on this project, so I've left some deprecated code in there. There's some commented out code for debugging purposes and some enemies in the gameState that will be implimented in future iterations. I also refactored some code so that the game can get increasingly harder the longer you play.
+
+I'm proud of the maiden version of this game and look forward to making it better in the future.
+
 ## Technology Used:
 
 * HTML5
