@@ -247,7 +247,7 @@ I am changing my name to Icarus because after six or seven different logic struc
 Everything I wrote out logically made sense, but after a while I realised I wanted to do tweening, but most of the resources for tweening are frameworks which, for some masochistic reason, I am commited to not using in this project. I tried to figure out the code found at http://mattshaw.org/projects/simple-javascript-tweening/ (which is a very handy resouce), but had no luck. 
 
 In the end, I just "turned off" the movement listeners and had the bee's x move at the same rate as the flower's.
- ```
+```
  function snapBee(destinationY, xOffset, yDiff) {
     if (gameState.bee.y < destinationY - 1 && gameState.bee.y > destinationY + 1) {
         // gradually move the bee to
@@ -271,14 +271,52 @@ setTimeout(function () {
     clearInterval(beePause);
     gameState.bee.beePause = false;
 }, gameState.pauseMS);
- ```
- And thus we have a little hover that runs at the same rate as the render and lasts for as long as gameState.pauseMS states (pauseMS means pause in Millisecods).
+```
+And thus we have a little hover that runs at the same rate as the render and lasts for as long as gameState.pauseMS states (pauseMS means pause in Millisecods).
+
+## Weekend 2 (Days 8 and 9)
+
+This day was all about pretty art and mobile. To impliment mobile, I made two dpads on either side of the screen so that the player can have a more erganomic experience. 
+
+I got the dpads working on the "mobile" version on my computer, but when I went to play the deployed version on my phone, the "pointerdown" event listeners that I had attached were not reading the sweet touch of my digits. So I added touch listeners and prevented the default on them (so the screen doesn't enlarge whenever you press on both sides). I added listeners to each of my arrow images with the help of a handy helper function!
+```
+function addTouch(direction, beeDirection) {
+    direction.forEach(function (btn) {
+        btn.addEventListener("touchstart", function(e){
+            e.preventDefault();
+            gameState.bee[beeDirection] = true;
+        }, { passive: false })
+        btn.addEventListener("pointerdown", function(e){
+            e.preventDefault();
+            gameState.bee[beeDirection] = true;
+        })
+    })
+    direction.forEach(function(btn){
+        btn.addEventListener("touchend", function(e){
+            e.preventDefault();
+            gameState.bee[beeDirection] = false;
+        })
+        btn.addEventListener("pointerup", function(e){
+            e.preventDefault();
+            gameState.bee[beeDirection] = false;
+        })
+    })
+}
+```
+After that, it was all about making the game look better. First up, I had to make a scary lookin' wasp that could instill the same feeling of panic and dismay that you feel when seeing a wasp zoom toward you in real life. 
+![The king of the Waspia](https://raw.githubusercontent.com/009kings/beeFree/master/assets/wasp.png)
+The red eyes were crucial to offset the cuteness of the bee. Following that, I added a feature that changes the bee image when it dies, to really hammer in how evil these wasps are.
+![Im-im-IMPERMANENCE](https://raw.githubusercontent.com/009kings/beeFree/master/assets/deadBee.png)
+You don't get to see this art aspect much, it's more of a horrific artistic treat for when you get to see the be fall.
+
+And finally, to make me feel better about how horrific the natural world is, I drew some lovely, serene mountains and put on Bob Ross.
 
 ## Technology Used:
 
 * HTML5
 * CSS
 * Javascript
+* Adobe Photoshop
 
 ## External Sources:
 
