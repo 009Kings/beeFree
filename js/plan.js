@@ -35,11 +35,17 @@ function createScore() {
 
 function addTouch(direction, beeDirection) {
     direction.forEach(function (btn) {
+        btn.addEventListener("touchstart", function(){
+            gameState.bee[beeDirection] = true;
+        })
         btn.addEventListener("pointerdown", function(){
             gameState.bee[beeDirection] = true;
         })
     })
     direction.forEach(function(btn){
+        btn.addEventListener("touchend", function(){
+            gameState.bee[beeDirection] = false;
+        })
         btn.addEventListener("pointerup", function(){
             gameState.bee[beeDirection] = false;
         })
