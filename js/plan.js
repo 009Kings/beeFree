@@ -13,6 +13,17 @@ function loadImage(location, keyName) {
     };
 }
 
+function renderScene(offset, imgName) {
+    // establish x coordinates and the "stepper" which is when the animation loops
+    var stepper = offset % BG_WIDTH;
+    var x1 = 0 - stepper;
+    var x2 = BG_WIDTH - stepper;
+
+    // Draw dem backgrounds
+    ctx.drawImage(images[imgName], x1, 0, BG_WIDTH, canvasHeight);
+    ctx.drawImage(images[imgName], x2, 0, BG_WIDTH, canvasHeight);
+}
+
 function generateXField() {
     return (Math.floor(Math.random() * (canvasHeight - 80)) + 10);
 }
@@ -181,44 +192,6 @@ function addListeners() {
     addTouch(right, "beeMoveRight");
     addTouch(down, "beeMoveDown");
     addTouch(left, "beeMoveLeft");
-}
-
-/* ---------------- Background ---------------- */
-
-function renderMountains() {
-    // establish x coordinates and the "stepper" which is when the animation loops
-    var stepper = mtnOffset % BG_WIDTH;
-    var x1 = 0 - stepper;
-    var x2 = BG_WIDTH - stepper;
-
-    // Draw dem backgrounds
-    ctx.drawImage(images.mountains, x1, 0, BG_WIDTH, canvasHeight);
-    ctx.drawImage(images.mountains, x2, 0, BG_WIDTH, canvasHeight);
-}
-
-/* ---------------- Background ---------------- */
-
-function renderBackground() {
-    // establish x coordinates and the "stepper" which is when the animation loops
-    var stepper = bgXOffset % BG_WIDTH;
-    var x1 = 0 - stepper;
-    var x2 = BG_WIDTH - stepper;
-
-    // Draw dem backgrounds
-    ctx.drawImage(images.background, x1, 0, BG_WIDTH, canvasHeight);
-    ctx.drawImage(images.background, x2, 0, BG_WIDTH, canvasHeight);
-}
-
-/* ---------------- Foreground ---------------- */
-
-function renderForeground() {
-    var stepper = foregroundXOffset % BG_WIDTH; //I can use this bc they are the same width
-    var x1 = 0 - stepper;
-    var x2 = BG_WIDTH - stepper;
-
-    // Draw dem foregrounds
-    ctx.drawImage(images.foreground, x1, 0, BG_WIDTH, canvasHeight);
-    ctx.drawImage(images.foreground, x2, 0, BG_WIDTH, canvasHeight);
 }
 
 /* ------------ Score ---------- */

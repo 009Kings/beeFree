@@ -133,12 +133,12 @@ function update() {
 
 function render() {
     // MUST RENDER IN ORDER OF LAYERS
-    renderMountains();
-    renderBackground();
+    renderScene(mtnOffset, "mountains");
+    renderScene(bgXOffset, "background");
     renderFlower();
     renderBee();
     renderWasp();
-    renderForeground();
+    renderScene(foregroundXOffset, "foreground");
     renderScore();
 }
 
