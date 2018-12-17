@@ -38,18 +38,18 @@ function addTouch(direction, beeDirection) {
         btn.addEventListener("touchstart", function(e){
             e.preventDefault();
             gameState.bee[beeDirection] = true;
-        })
-        btn.addEventListener("pointerdown", function(){
+        }, { passive: false })
+        btn.addEventListener("pointerdown", function(e){
             e.preventDefault();
             gameState.bee[beeDirection] = true;
         })
     })
     direction.forEach(function(btn){
-        btn.addEventListener("touchend", function(){
+        btn.addEventListener("touchend", function(e){
             e.preventDefault();
             gameState.bee[beeDirection] = false;
         })
-        btn.addEventListener("pointerup", function(){
+        btn.addEventListener("pointerup", function(e){
             e.preventDefault();
             gameState.bee[beeDirection] = false;
         })
