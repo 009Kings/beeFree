@@ -7,6 +7,7 @@ function load() {
     loadImage("flower1polinated.png", "flower1pollinated");
     loadImage("wasp.png", "wasp");
     loadImage("deadBee.png", "deadBee");
+    loadImage("mountains.png", "mountains");
 }
 
 /* -------- Start the game! Featuring modial -------- */
@@ -109,7 +110,8 @@ function tick() {
 function update() {
     // Zoomies of various things
     //Scenery
-    bgXOffset += .5;
+    mtnOffset += .5;
+    bgXOffset += .75;
     foregroundXOffset += 4;
 
     // Flowers
@@ -131,12 +133,13 @@ function update() {
 
 function render() {
     // MUST RENDER IN ORDER OF LAYERS
-        renderBackground();
-        renderFlower();
-        renderBee();
-        renderWasp();
-        renderForeground();
-        renderScore();
+    renderMountains();
+    renderBackground();
+    renderFlower();
+    renderBee();
+    renderWasp();
+    renderForeground();
+    renderScore();
 }
 
 function gameOver() {

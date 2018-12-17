@@ -19,5 +19,6 @@ let mobile = false;
 
 // Coordinate Variables
 let bgXOffset = 0;
+let mtnOffset = 0;
 let flowerY;
 let foregroundXOffset = 0;

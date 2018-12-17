@@ -1,6 +1,8 @@
 # Bee Free: Pollination Station
 
-This is my first coding project. I wanted to do a cute, low-violence game that is fun and relaxing. I also wanted to make my own art assets
+This is my first coding project. I wanted to do a cute, low-violence game that is fun and relaxing. I also wanted to make my own art assets.
+
+Link to the live game! https://009kings.github.io/beeFree/
 
 ## Getting Started
 
@@ -309,7 +311,7 @@ The red eyes were crucial to offset the cuteness of the bee. Following that, I a
 ![Im-im-IMPERMANENCE](https://raw.githubusercontent.com/009kings/beeFree/master/assets/deadBee.png)
 You don't get to see this art aspect much, it's more of a horrific artistic treat for when you get to see the be fall.
 
-And finally, to make me feel better about how horrific the natural world is, I drew some lovely, serene mountains and put on Bob Ross.
+And finally, to make me feel better about how horrific the natural world is, I drew some lovely, serene mountains and put on Bob Ross. I added another layer of Parallax and realised another area wherin I could refactor.
 
 ## Technology Used:
 
@@ -329,3 +331,4 @@ And finally, to make me feel better about how horrific the natural world is, I d
 
 * Thank you to Axel Magnuson for helping me will all things math during the project
 * Kudos to my lecturers at General Assembly for giving me the skills to create this game and helping me out during it's creation
+* Big shoutout to my cohort buddies in helping me solve problems and think of new, clever ideas to help my game get better.

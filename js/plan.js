@@ -185,6 +185,19 @@ function addListeners() {
 
 /* ---------------- Background ---------------- */
 
+function renderMountains() {
+    // establish x coordinates and the "stepper" which is when the animation loops
+    var stepper = mtnOffset % BG_WIDTH;
+    var x1 = 0 - stepper;
+    var x2 = BG_WIDTH - stepper;
+
+    // Draw dem backgrounds
+    ctx.drawImage(images.mountains, x1, 0, BG_WIDTH, canvasHeight);
+    ctx.drawImage(images.mountains, x2, 0, BG_WIDTH, canvasHeight);
+}
+
+/* ---------------- Background ---------------- */
+
 function renderBackground() {
     // establish x coordinates and the "stepper" which is when the animation loops
     var stepper = bgXOffset % BG_WIDTH;
